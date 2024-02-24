@@ -1,0 +1,38 @@
+.Button {
+	padding: 6px;
+	transition: all 0.3s ease-in-out;
+}
+
+.primary {
+	background-color: var(--primary-color);
+	color: #fff;
+	border: none;
+
+	&:hover {
+		background-color: color-mix(
+			in srgb,
+			var(--primary-color),
+			rgb(205, 247, 255)
+		);
+		color: #fff;
+	}
+
+	&:active {
+		background-color: color-mix(in srgb, var(--primary-color), rgb(1, 57, 66));
+	}
+}
+
+.link {
+	background-color: transparent;
+	border: none;
+	outline: none;
+	color: var(--link-color);
+
+	&:hover {
+		color: color-mix(in srgb, var(--link-color), rgb(205, 247, 255));
+	}
+
+	&:active {
+		color: color-mix(in srgb, var(--link-color), rgb(54, 41, 241));
+	}
+}

@@ -1,0 +1,13 @@
+.Input {
+	min-width: 70px;
+	padding: 9px;
+	outline: 1px solid rgba($color: #e7e7e773, $alpha: 1);
+	background-color: rgba($color: #fcfcfc24, $alpha: 1);
+	border-radius: 5px;
+	border: none;
+}
+
+.Input:focus {
+	border: none;
+	outline: 2px solid rgba(111, 215, 252, 0.884);
+}

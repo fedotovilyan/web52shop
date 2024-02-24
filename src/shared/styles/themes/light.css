@@ -1,0 +1,8 @@
+.app.light {
+	--primary-color: rgba(72, 206, 255, 0.894);
+	--secondary-color: rgba(245, 245, 245, 0.682);
+
+	--link-color: rgba(72, 124, 255, 0.884);
+
+	--primary-background-color: rgba(134, 252, 238, 0.202);
+}

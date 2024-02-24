@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String      @id @default(cuid())
+  email         String      @unique @db.VarChar(255)
+  password      String
+  first_name    String?     @db.VarChar(127)
+  last_name     String?     @db.VarChar(127)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  role          String      @db.VarChar(32)
+  
+  reviews       ProductReview[]
+  purchases     UserProduct[]
+
+  @@map("user")
+}
+
+model Product {
+  id            Int         @id @default(autoincrement())
+  name          String   
+  description   String?
+  price         Float
+  currency      String      @db.VarChar(16)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  buyers        UserProduct[]
+  reviews       ProductReview[]
+
+  @@map("product")
+}
+
+model UserProduct {
+  id                BigInt      @id @default(autoincrement())
+  user_id           String   
+  buyer             User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  product_id        Int
+  product           Product     @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  count             Int
+  status            String      @db.VarChar(32)
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  @@map("user_product")
+}
+
+model ProductReview {
+  id                BigInt      @id @default(autoincrement())
+  user_id           String   
+  user              User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  product_id        Int
+  product           Product     @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  rate              Float
+  comment           String?     @db.VarChar(500)
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  @@map("product_review")
+}

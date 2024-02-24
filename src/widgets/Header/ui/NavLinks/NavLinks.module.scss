@@ -1,0 +1,12 @@
+.NavLinks {
+	display: flex;
+	gap: 10px;
+}
+
+.link {
+	font-size: 18px;
+}
+
+.current {
+	color: color-mix(in srgb, var(--link-color), rgb(15, 9, 96)) !important;
+}
