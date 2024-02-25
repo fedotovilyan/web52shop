@@ -1,4 +1,4 @@
-import { ProfileBtn } from '@/features/ProfileBtn/ui/ProfileBtn';
+import { ProfileBtns } from '@/features/ProfileBtns';
 import cls from './Header.module.scss';
 import { NavLinks } from './NavLinks/NavLinks';
 
@@ -7,7 +7,7 @@ export const Header = () => {
 		<header className={cls.header}>
 			<NavLinks />
 			<input />
-			<ProfileBtn />
+			<ProfileBtns />
 		</header>
 	)
 };

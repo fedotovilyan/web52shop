@@ -1,3 +1,3 @@
 export interface JwtGenerateTokensPayload {
-	email: string;
+	phone: string;
 }

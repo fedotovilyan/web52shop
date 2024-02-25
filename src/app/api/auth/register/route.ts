@@ -3,17 +3,20 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 interface IBody {
-	email: string;
+	phone: string;
 	password: string;
 }
 
 export async function POST(req: Request) {
 	const body = (await req.json()) as IBody;
 
+	console.log(body);
 	try {
-		const { email } = await AuthService.register(body);
+		const { phone } = await AuthService.register(body);
 
-		const { accessCookie, refreshCookie } = AuthService.generateCookies({ email });
+		const { accessCookie, refreshCookie } = AuthService.generateCookies({
+			phone,
+		});
 
 		const cookiesApi = cookies();
 		cookiesApi.set(accessCookie);

@@ -11,13 +11,21 @@ export class UserService {
 		});
 	}
 
+	static getUserByPhone(phone: string) {
+		return prisma.user.findUnique({
+			where: {
+				phone,
+			},
+		});
+	}
+
 	static registerUser(payload: CreateUserPayloadDTO) {
 		return prisma.user.create({
 			data: {
-				email: payload.email,
+				phone: payload.phone,
 				password: payload.password,
-				role: UserRole.Guest,
+				role: UserRole.Visitor,
 			},
-		})
+		});
 	}
 }

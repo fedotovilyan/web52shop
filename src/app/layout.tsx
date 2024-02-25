@@ -22,8 +22,7 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<Providers>
 					<div className="app light">
-						<Header />
-						<main>{children}</main>
+						{children}
 					</div>
 				</Providers>
 			</body>
