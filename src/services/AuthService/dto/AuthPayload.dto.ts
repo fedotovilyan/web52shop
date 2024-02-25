@@ -1,4 +1,4 @@
 export interface AuthPayloadDTO {
-	email: string;
+	phone: string;
 	password: string;
 }

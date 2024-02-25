@@ -1,0 +1,24 @@
+.login_form {
+	display: flex;
+	flex-direction: column;
+}
+
+.password_input {
+	width: 100%;
+}
+
+.phone_wrapper,
+.pass_wrapper {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 15px;
+	gap: 2px;
+}
+
+.err_input {
+	outline: 1px solid rgba(255, 0, 0, 0.493);
+}
+
+.submit_btn {
+	width: 100%;
+}
