@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import { JwtGenerateTokensPayload } from "./dto/JwtGenerateTokensPayload.dto";
+import { Tokens } from "@/shared/types/Tokens";
+import { VerifyTokenResponse } from "./dto/VerifyTokenResponse.dto";
 
 export class JwtService {
 	static JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET || "";
@@ -18,5 +20,11 @@ export class JwtService {
 		});
 
 		return { accessToken, refreshToken };
+	}
+
+	static verifyToken(token: string, type: Tokens): VerifyTokenResponse {
+		const secret = type === Tokens.Access ? this.JWT_ACCESS_SECRET : this.JWT_REFRESH_SECRET;
+
+		return jwt.verify(token, secret) as VerifyTokenResponse;
 	}
 }

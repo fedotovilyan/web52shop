@@ -6,7 +6,7 @@ import { selectAuthData, startRegistration } from "@/entities/User";
 import { useRouter } from "next/navigation";
 import { WEB_ROUTES } from "@/shared/routes";
 import { useEffect, useState } from "react";
-import { Alert, Loader } from "@/shared/ui";
+import { Alert, Button, Loader } from "@/shared/ui";
 import { AlertType } from "@/shared/types/AlertType";
 import { Divider } from "@/shared/ui/Divider/Divider";
 
@@ -20,7 +20,7 @@ export const Registration = () => {
 		if (isSuccess) {
 			setTimeout(() => {
 				router.push(WEB_ROUTES.main);
-			}, 1500);
+			}, 500);
 		}
 	}, [isSuccess]);
 

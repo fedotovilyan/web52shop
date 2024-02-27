@@ -1,6 +1,6 @@
 "use client";
+import { Logout } from "@/shared/api/Auth";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Logout } from "@/shared/api/User";
 
 export const logout = createAsyncThunk<
 	void,

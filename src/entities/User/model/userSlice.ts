@@ -1,7 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+"use client";
+
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../types/User";
 import { startRegistration } from "./services/startRegistration";
 import { logout } from "./services/logout";
+import { signIn } from "./services/signIn";
+import { refreshTokens } from "./services/refreshTokens";
+import { getProfile } from "./services/getProfile";
 
 export interface UserState {
 	auth: {
@@ -34,6 +39,9 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		resetState: () => initialState,
+		setAccessToken: (state, { payload }: PayloadAction<string | null>) => {
+			state.auth.accessToken = payload;
+		},
 	},
 	extraReducers(builder) {
 		builder
@@ -45,7 +53,7 @@ export const userSlice = createSlice({
 			.addCase(startRegistration.fulfilled, (state, { payload }) => {
 				state.profile.profileData = {
 					...state.profile.profileData,
-					phone: payload.phone,
+					email: payload.email,
 				};
 				state.auth.accessToken = payload.accessToken;
 				state.auth.loading = false;
@@ -55,9 +63,29 @@ export const userSlice = createSlice({
 				state.auth.error = payload;
 				state.auth.loading = false;
 				state.profile.loading = false;
-			})
+			});
 
-		
+		builder
+			.addCase(signIn.pending, (state) => {
+				state.auth.loading = true;
+				state.auth.error = null;
+				state.profile.loading = true;
+			})
+			.addCase(signIn.fulfilled, (state, { payload }) => {
+				state.profile.profileData = {
+					...state.profile.profileData,
+					email: payload.email,
+				};
+				state.auth.accessToken = payload.accessToken;
+				state.auth.loading = false;
+				state.profile.loading = false;
+			})
+			.addCase(signIn.rejected, (state, { payload }) => {
+				state.auth.error = payload;
+				state.auth.loading = false;
+				state.profile.loading = false;
+			});
+
 		builder
 			.addCase(logout.pending, (state) => {
 				state.auth.loading = true;
@@ -71,6 +99,34 @@ export const userSlice = createSlice({
 				state.auth.error = payload;
 				state.auth.loading = false;
 				state.profile.loading = false;
+			});
+
+		builder
+			.addCase(refreshTokens.pending, (state) => {
+				state.auth.loading = true;
 			})
+			.addCase(refreshTokens.fulfilled, (state, { payload }) => {
+				state.auth.accessToken = payload;
+				state.auth.loading = false;
+			})
+			.addCase(refreshTokens.rejected, (state, { payload }) => {
+				state.auth.error = payload;
+				state.auth.loading = false;
+			});
+
+		builder
+			.addCase(getProfile.pending, (state) => {
+				state.profile.loading = true;
+			})
+			.addCase(getProfile.fulfilled, (state, { payload }) => {
+				state.profile.profileData = payload;
+				state.profile.loading = false;
+			})
+			.addCase(getProfile.rejected, (state, { payload }) => {
+				state.profile.error = payload;
+				state.profile.loading = false;
+			});
 	},
 });
+
+export const { resetState, setAccessToken } = userSlice.actions;
