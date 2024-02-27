@@ -4,3 +4,7 @@ export * from './model/selectors/selectAuthData';
 export * from "./model/services/startRegistration";
 export * from './model/selectors/selectAccessToken';
 export * from './model/services/logout';
+export * from './model/services/signIn';
+export * from './model/selectors/selectProfile';
+export * from './model/services/getProfile';
+export * from './model/services/refreshTokens';

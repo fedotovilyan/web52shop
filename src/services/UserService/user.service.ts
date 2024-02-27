@@ -22,7 +22,7 @@ export class UserService {
 	static registerUser(payload: CreateUserPayloadDTO) {
 		return prisma.user.create({
 			data: {
-				phone: payload.phone,
+				email: payload.email,
 				password: payload.password,
 				role: UserRole.Visitor,
 			},

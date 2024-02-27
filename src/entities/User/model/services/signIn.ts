@@ -4,15 +4,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IUser } from "../../types/User";
 import { Tokens } from "@/shared/types/Tokens";
 import { getCookie } from "cookies-next";
-import { RegisterUser } from "@/shared/api/Auth";
+import { SignIn } from "@/shared/api/Auth";
 
-export const startRegistration = createAsyncThunk<
+export const signIn = createAsyncThunk<
 	Pick<IUser, "email"> & { accessToken: string },
 	Pick<IUser, "email"> & { password: string },
 	{ rejectValue: string }
->("user/registration", async (payload, thunkApi) => {
+>("user/signIn", async (payload, thunkApi) => {
 	try {
-		await RegisterUser(payload);
+		await SignIn(payload);
 
 		const accessToken = getCookie(Tokens.Access) || "";
 

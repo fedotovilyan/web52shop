@@ -1,0 +1,26 @@
+.SignIn {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 25px;
+	height: 100%;
+	min-width: 300px;
+	min-height: 300px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 13px 13px 31px 0px rgba(19, 179, 247, 0.34);
+}
+
+.title {
+	text-align: center;
+}
+
+.alert {
+	margin-bottom: 15px;
+	max-width: 300px;
+}
+
+.login_form {
+	min-width: 250px;
+}

@@ -21,13 +21,25 @@ export const ProfileBtns = () => {
 		router.push(WEB_ROUTES.registration);
 	};
 
+	const onSignInClick = () => {
+		router.push(WEB_ROUTES.login);
+	};
+
 	return (
 		<div>
-			{isLoggedIn && <Button onClick={onLogoutClick} theme={ButtonTheme.Link}>Выйти</Button>}
+			{isLoggedIn && (
+				<Button onClick={onLogoutClick} theme={ButtonTheme.Link}>
+					Выйти
+				</Button>
+			)}
 			{!isLoggedIn && (
 				<div>
-					<Button theme={ButtonTheme.Link}>Войти</Button>
-					<Button onClick={onRegisterClick} theme={ButtonTheme.Link}>Регистрация</Button>
+					<Button onClick={onSignInClick} theme={ButtonTheme.Link}>
+						Войти
+					</Button>
+					<Button onClick={onRegisterClick} theme={ButtonTheme.Link}>
+						Регистрация
+					</Button>
 				</div>
 			)}
 		</div>

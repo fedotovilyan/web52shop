@@ -5,6 +5,7 @@ export default function MainLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	console.log('rerendered');
 	return (
 		<div>
 			<Header />

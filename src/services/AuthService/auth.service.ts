@@ -8,29 +8,29 @@ import { Tokens } from "@/shared/types/Tokens";
 import dayjs from "dayjs";
 
 export class AuthService {
-	static async register({ phone, password }: AuthPayloadDTO) {
-		if (!phone || !password)
-			throw ApiError.BadRequestException("Отсутствует телефон или пароль!");
+	static async register({ email, password }: AuthPayloadDTO) {
+		if (!email || !password)
+			throw ApiError.BadRequestException("Отсутствует email или пароль!");
 
-		const isPhoneAvailable = !(await UserService.getUserByPhone(phone));
+		const isEmailAvailable = !(await UserService.getUserByEmail(email));
 
-		if (!isPhoneAvailable)
-			throw ApiError.BadRequestException("Введенный вами телефон уже занят!");
+		if (!isEmailAvailable)
+			throw ApiError.BadRequestException("Введенный вами email уже занят!");
 
 		const hash = await bcrypt.hash(
 			password.toString(),
 			Number(process.env.BCRYPT_SALT) || 10
 		);
 
-		return UserService.registerUser({ phone, password: hash });
+		return UserService.registerUser({ email, password: hash });
 	}
 
 	static generateCookies({
-		phone,
+		email,
 	}: {
-		phone: AuthPayloadDTO["phone"];
+		email: AuthPayloadDTO["email"];
 	}): GenerateCookiesResponseDTO {
-		const { accessToken, refreshToken } = JwtService.generateTokens({ phone });
+		const { accessToken, refreshToken } = JwtService.generateTokens({ email });
 
 		const accessCookie = {
 			name: Tokens.Access,
@@ -52,17 +52,17 @@ export class AuthService {
 		return { accessCookie, refreshCookie };
 	}
 
-	static async login({ phone, password }: AuthPayloadDTO) {
-		if (!phone || !password)
-			throw ApiError.BadRequestException("Отсутствует телефон или пароль!");
+	static async login({ email, password }: AuthPayloadDTO) {
+		if (!email || !password)
+			throw ApiError.BadRequestException("Отсутствует email или пароль!");
 
-		const user = await UserService.getUserByPhone(phone);
+		const user = await UserService.getUserByEmail(email);
 		const isPassMatch = await bcrypt.compare(password, user?.password || "");
 
 		if (!user || !isPassMatch) {
-			throw ApiError.BadRequestException("Введен неверный телефон или пароль!");
+			throw ApiError.BadRequestException("Введен неверный email или пароль!");
 		}
 
-		return { phone };
+		return { email };
 	}
 }
