@@ -36,9 +36,21 @@ export const InputPassword: FC<InputPassword> = forwardRef<
 				className={cls.visible_toggle_btn}
 			>
 				{visible ? (
-					<VisibleSvg className={cls.icon} alt="" height={25} width={25} />
+					<VisibleSvg
+						className={cls.icon}
+						alt=""
+						fill="#48ceffe4"
+						height={25}
+						width={25}
+					/>
 				) : (
-					<HideSvg className={cls.icon} alt="" height={25} width={25} />
+					<HideSvg
+						className={cls.icon}
+						alt=""
+						fill="#48ceffe4"
+						height={25}
+						width={25}
+					/>
 				)}
 			</Button>
 		</div>

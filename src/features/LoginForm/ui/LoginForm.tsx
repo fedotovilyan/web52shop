@@ -2,7 +2,7 @@
 import { Button, Input, InputPassword } from "@/shared/ui";
 import { ErrorText } from "@/shared/ui/ErrorText/ErrorText";
 import { FC, FormHTMLAttributes } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import cls from "./LoginForm.module.scss";
 import classNames from "classnames";
 import { emailRegexp } from "@/shared/constants";

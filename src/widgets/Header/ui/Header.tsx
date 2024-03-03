@@ -1,16 +1,22 @@
-import { SearchInput } from "@/shared/ui";
 import cls from "./Header.module.scss";
-import { NavLinks } from "./NavLinks/NavLinks";
 import { ProfileBtns } from "./ProfileBtns/ProfileBtns";
+import { GlobalSearch } from "@/features/GlobalSearch";
+import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
 
 export const Header = () => {
 	return (
 		<header className={cls.header}>
-			<NavLinks />
-			<SearchInput
-				placeholder="Поиск"
-			/>
-			<ProfileBtns />
+			<div className={cls.header_block}>
+				<HeaderLogo className={cls.header_logo} />
+			</div>
+			<div className={cls.header_block}>
+				<GlobalSearch
+					containerClassName={cls.search_input_container}
+				/>
+			</div>
+			<div className={cls.header_block}>
+				<ProfileBtns />
+			</div>
 		</header>
 	);
 };

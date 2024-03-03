@@ -12,7 +12,7 @@
 		background-color: color-mix(
 			in srgb,
 			var(--primary-color),
-			rgb(205, 247, 255)
+			rgba(255, 255, 255, 0.1)
 		);
 		color: #fff;
 	}
@@ -25,14 +25,27 @@
 .link {
 	background-color: transparent;
 	border: none;
-	outline: none;
 	color: var(--link-color);
 
 	&:hover {
-		color: color-mix(in srgb, var(--link-color), rgb(205, 247, 255));
+		color: var(--link-color-hovered);
 	}
 
 	&:active {
-		color: color-mix(in srgb, var(--link-color), rgb(54, 41, 241));
+		color: var(--link-color-active);
+	}
+}
+
+
+.transparent {
+	background-color: transparent;
+	border: none;
+
+	&:hover {
+		background-color: transparent;
+	}
+
+	&:active {
+		background-color: transparent;
 	}
 }

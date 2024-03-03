@@ -23,17 +23,21 @@ export const SignIn: FC<SignInProps> = (props) => {
 	const onFormSubmit = (data: LoginFormInputs) => {
 		dispatch(signIn(data))
 			.unwrap()
-			.then(() => setIsSuccess(true))
-			.catch(() => {});
+			.then(() => {
+				setIsSuccess(true);
+			})
+			.catch((e) => {
+				console.log(e);
+			});
 	};
 
 	useEffect(() => {
 		if (isSuccess) {
 			setTimeout(() => {
 				router.push(WEB_ROUTES.main);
-			}, 500)
+			}, 500);
 		}
-	}, [isSuccess])
+	}, [isSuccess, router]);
 
 	return (
 		<div className={classNames(cls.SignIn, className)}>
@@ -41,12 +45,12 @@ export const SignIn: FC<SignInProps> = (props) => {
 			<Divider />
 			<Loader spinning={loading}>
 				{error && (
-					<Alert type={AlertType.Error} className={cls.alert}>
+					<Alert type={AlertType.Error} className={cls.alert} closable>
 						{error}
 					</Alert>
 				)}
 				{isSuccess && (
-					<Alert type={AlertType.Success} className={cls.alert}>
+					<Alert type={AlertType.Success} className={cls.alert} closable>
 						Авторизация прошла успешно
 					</Alert>
 				)}

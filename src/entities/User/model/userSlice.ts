@@ -18,6 +18,7 @@ export interface UserState {
 		loading: boolean;
 		error: string | null | undefined;
 		profileData: Partial<IUser>;
+		isProfileFetching: boolean;
 	};
 }
 
@@ -31,6 +32,7 @@ const initialState: UserState = {
 		loading: false,
 		error: null,
 		profileData: {},
+		isProfileFetching: false,
 	},
 };
 
@@ -48,7 +50,6 @@ export const userSlice = createSlice({
 			.addCase(startRegistration.pending, (state) => {
 				state.auth.loading = true;
 				state.auth.error = null;
-				state.profile.loading = true;
 			})
 			.addCase(startRegistration.fulfilled, (state, { payload }) => {
 				state.profile.profileData = {
@@ -57,40 +58,35 @@ export const userSlice = createSlice({
 				};
 				state.auth.accessToken = payload.accessToken;
 				state.auth.loading = false;
-				state.profile.loading = false;
 			})
 			.addCase(startRegistration.rejected, (state, { payload }) => {
 				state.auth.error = payload;
 				state.auth.loading = false;
-				state.profile.loading = false;
 			});
 
 		builder
 			.addCase(signIn.pending, (state) => {
 				state.auth.loading = true;
 				state.auth.error = null;
-				state.profile.loading = true;
 			})
 			.addCase(signIn.fulfilled, (state, { payload }) => {
+				console.log("fullfiled signIn");
 				state.profile.profileData = {
 					...state.profile.profileData,
 					email: payload.email,
 				};
 				state.auth.accessToken = payload.accessToken;
 				state.auth.loading = false;
-				state.profile.loading = false;
 			})
 			.addCase(signIn.rejected, (state, { payload }) => {
 				state.auth.error = payload;
 				state.auth.loading = false;
-				state.profile.loading = false;
 			});
 
 		builder
 			.addCase(logout.pending, (state) => {
 				state.auth.loading = true;
 				state.auth.error = null;
-				state.profile.loading = true;
 			})
 			.addCase(logout.fulfilled, (state) => {
 				state = initialState;
@@ -98,7 +94,6 @@ export const userSlice = createSlice({
 			.addCase(logout.rejected, (state, { payload }) => {
 				state.auth.error = payload;
 				state.auth.loading = false;
-				state.profile.loading = false;
 			});
 
 		builder
@@ -116,15 +111,15 @@ export const userSlice = createSlice({
 
 		builder
 			.addCase(getProfile.pending, (state) => {
-				state.profile.loading = true;
+				state.profile.isProfileFetching = true;
 			})
 			.addCase(getProfile.fulfilled, (state, { payload }) => {
 				state.profile.profileData = payload;
-				state.profile.loading = false;
+				state.profile.isProfileFetching = false;
 			})
 			.addCase(getProfile.rejected, (state, { payload }) => {
 				state.profile.error = payload;
-				state.profile.loading = false;
+				state.profile.isProfileFetching = false;
 			});
 	},
 });

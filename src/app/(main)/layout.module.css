@@ -1,0 +1,12 @@
+.main_wrapper {
+	padding: var(--main-wrapper-padding);
+}
+
+.main {
+	background-color: rgba(241, 250, 252, 0.856);
+	padding: 20px;
+	min-height: calc(
+		100vh - var(--header-height) - 2 * var(--main-wrapper-padding)
+	);
+	border-radius: 10px;
+}

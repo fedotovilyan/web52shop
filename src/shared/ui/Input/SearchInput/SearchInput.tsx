@@ -7,13 +7,15 @@ import classNames from "classnames";
 import SearchSvg from "@/shared/assets/icons/search.svg";
 import { Button } from "../../Button/Button";
 
-interface SearchInputProps extends InputProps {
+export interface SearchInputProps extends InputProps {
 	onSearch?: (value: string) => void;
 	className?: string;
+	containerClassName?: string;
 }
 
 export const SearchInput: FC<SearchInputProps> = (props) => {
-	const { onSearch, className, onChange, ...rest } = props;
+	const { onSearch, className, onChange, containerClassName, ...rest } = props;
+	console.log(containerClassName);
 	const [value, setValue] = useState("");
 
 	const onKeyDownInput: KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -30,7 +32,7 @@ export const SearchInput: FC<SearchInputProps> = (props) => {
 	};
 
 	return (
-		<div className={cls.search_input_container}>
+		<div className={classNames(cls.search_input_container, containerClassName)}>
 			<Input
 				{...rest}
 				className={classNames(cls.input, className)}

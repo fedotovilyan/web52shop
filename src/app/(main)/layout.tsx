@@ -1,15 +1,18 @@
 import { Header } from "@/widgets/Header/ui/Header";
+import cls from './layout.module.css';
+import { ReactNode } from "react";
 
 export default function MainLayout({
 	children,
 }: Readonly<{
-	children: React.ReactNode;
+	children: ReactNode;
 }>) {
-	console.log('rerendered');
 	return (
-		<div>
+		<div className={cls.layout}>
 			<Header />
-			<main>{children}</main>
+			<div className={cls.main_wrapper}>
+				<main className={cls.main}>{children}</main>
+			</div>
 		</div>
 	);
 }

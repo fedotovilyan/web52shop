@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 import { Button, ButtonProps, ButtonTheme } from "@/shared/ui";
 import Link from "next/link";
 
-interface ButtonLinkProps extends ButtonProps, React.PropsWithChildren {
+interface ButtonLinkProps extends ButtonProps, PropsWithChildren {
 	href: string;
 }
 

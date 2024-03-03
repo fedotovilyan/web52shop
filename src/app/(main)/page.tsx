@@ -1,8 +1,6 @@
-import Image from "next/image";
 import styles from "./page.module.css";
-import { Alert, Input, Loader } from "@/shared/ui";
+import { Alert } from "@/shared/ui";
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button";
-import { InputPassword } from "@/shared/ui/Input/InputPassword/InputPassword";
 import { AlertType } from "@/shared/types/AlertType";
 
 export default function Home() {
@@ -14,9 +12,20 @@ export default function Home() {
 			</Button>
 			<InputPassword /> */}
 			<Alert />
-			<Alert type={AlertType.Error} />
+			<Alert type={AlertType.Error} closable>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+				distinctio nihil nesciunt! Sunt deleniti delectus, optio aliquam
+				exercitationem quaerat similique necessitatibus sapiente modi sint odio!
+				Modi omnis quia sequi veritatis. Lorem, ipsum dolor sit amet consectetur
+				adipisicing elit. Inventore molestias, odit ullam magnam iure ducimus
+				minima. Commodi illum laboriosam quasi praesentium blanditiis ab,
+				numquam harum facilis labore pariatur, a perferendis!
+			</Alert>
 			<Alert type={AlertType.Success} />
 			<Alert type={AlertType.Warning} />
+			<Button style={{ marginRight: 15 }} theme={ButtonTheme.Primary}>
+				Hello world
+			</Button>
 		</div>
 	);
 }

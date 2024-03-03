@@ -1,11 +1,12 @@
 import classNames from "classnames";
-import { ButtonHTMLAttributes, FC, MouseEventHandler, useState } from "react";
+import { ButtonHTMLAttributes, FC } from "react";
 import cls from "./Button.module.scss";
 
 export enum ButtonTheme {
 	Primary = "primary",
 	Default = "default",
 	Link = "link",
+	Transparent = "transparent",
 }
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -2,11 +2,13 @@
 
 import { getProfile, selectProfile } from "@/entities/User";
 import { useAppDispatch, useAppSelector } from "./store";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
+import { Loader } from "@/shared/ui";
 
-export default function Template({ children }: { children: React.ReactNode }) {
+export default function Template({ children }: { children: ReactNode }) {
 	const {
 		profileData: { email },
+		isProfileFetching,
 	} = useAppSelector(selectProfile);
 	const dispatch = useAppDispatch();
 
@@ -14,7 +16,11 @@ export default function Template({ children }: { children: React.ReactNode }) {
 		if (!email) {
 			dispatch(getProfile());
 		}
-	}, [email]);
+	}, [dispatch, email]);
+
+	if (isProfileFetching) {
+		return <Loader spinning fullscreen />;
+	}
 
 	return <>{children}</>;
 }

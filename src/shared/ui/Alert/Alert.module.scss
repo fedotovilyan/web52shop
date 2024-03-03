@@ -1,10 +1,37 @@
 .Alert {
 	display: flex;
 	padding: 15px;
+	padding-right: 25px;
 	border-radius: 10px;
 	align-items: center;
 	gap: 15px;
 	word-break: break-word;
+	position: relative;
+	transition: 0.3s transform ease-in-out;
+	transform: scale(1);
+}
+
+.is_closing {
+	transform: scale(0);
+
+	.close_btn {
+		display: none;
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+.close_btn {
+	top: 5px;
+	right: 5px;
+	position: absolute;
+	padding: 0;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
 }
 
 .icon {

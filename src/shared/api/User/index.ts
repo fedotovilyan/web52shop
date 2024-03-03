@@ -16,5 +16,5 @@ export async function GetCurrentUser(
 		throw new Error(body.message);
 	}
 
-	return body;
+	return body.data;
 }

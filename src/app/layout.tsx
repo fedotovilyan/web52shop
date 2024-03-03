@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Philosopher } from "next/font/google";
 import "./globals.css";
 import "@/shared/styles/themes/light.css";
 import { Providers } from "@/shared/providers/Providers";
+import { ReactNode } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Philosopher({ weight: "400", subsets: ['cyrillic', 'cyrillic-ext', 'latin' ] });
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -14,15 +15,13 @@ export const metadata: Metadata = {
 export default function RootLayout({
 	children,
 }: Readonly<{
-	children: React.ReactNode;
+	children: ReactNode;
 }>) {
 	return (
 		<html lang="en">
 			<body className={inter.className}>
 				<Providers>
-					<div className="app light">
-						{children}
-					</div>
+					<div className="app light">{children}</div>
 				</Providers>
 			</body>
 		</html>

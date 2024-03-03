@@ -1,3 +1,4 @@
+import { AuthService } from "@/services/AuthService/auth.service";
 import { JwtService } from "@/services/JwtService/jwt.service";
 import { UserService } from "@/services/UserService/user.service";
 import { Tokens } from "@/shared/types/Tokens";
@@ -15,18 +16,21 @@ export async function GET(req: Request) {
 		);
 
 	try {
-		const decoded = JwtService.verifyToken(
-			accessToken,
-			Tokens.Access
-		);
+		const decoded = AuthService.verifyToken(accessToken, Tokens.Access);
 
 		const user = await UserService.getUserByEmail(decoded.email);
-		
-		return NextResponse.json({ ok: true, data: {...user, password: undefined} });
-	} catch {
+
+		return NextResponse.json({
+			ok: true,
+			data: { ...user, password: undefined },
+		});
+	} catch (e: any) {
 		return NextResponse.json(
-			{ ok: false, message: "Вы не авторизованы" },
-			{ status: 401 }
+			{
+				ok: false,
+				message: e?.message || "Что-то пошло не так на сервере",
+			},
+			{ status: e?.status || 500 }
 		);
 	}
 }

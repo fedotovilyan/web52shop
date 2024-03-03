@@ -6,6 +6,7 @@ import { JwtService } from "../JwtService/jwt.service";
 import { GenerateCookiesResponseDTO } from "./dto/GenerateCookiesResponse.dto";
 import { Tokens } from "@/shared/types/Tokens";
 import dayjs from "dayjs";
+import { VerifyTokenResponse } from "../JwtService/dto/VerifyTokenResponse.dto";
 
 export class AuthService {
 	static async register({ email, password }: AuthPayloadDTO) {
@@ -64,5 +65,13 @@ export class AuthService {
 		}
 
 		return { email };
+	}
+
+	static verifyToken(token: string, type: Tokens): VerifyTokenResponse {
+		try {
+			return JwtService.verifyToken(token, type);
+		} catch(e) {
+			throw ApiError.UnauthorizedException("Вы не авторизованы")
+		}
 	}
 }

@@ -1,15 +1,27 @@
 {
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
 	"extends": [
 		"plugin:@typescript-eslint/recommended",
 		"plugin:@next/next/recommended",
 		"next",
-		"next/core-web-vitals"
+		"next/core-web-vitals",
+		"eslint:recommended"
 	],
-	"plugins": ["react-hooks", "@next/eslint-plugin-next"],
+	"plugins": [
+		"react-hooks",
+		"@next/eslint-plugin-next",
+		"@typescript-eslint"
+	],
 	"rules": {
 		"react-hooks/rules-of-hooks": "error",
 		"react-hooks/exhaustive-deps": "warn",
-		"next/link-passhref": "error",
-		"next/no-img-element": "off" // if you prefer to use <img> tags directly
+		"next/no-img-element": "off",
+		"semi": ["error", "always"],
+		"no-unused-vars": "warn",
+		"@typescript-eslint/no-unused-vars": "warn",
+		"@typescript-eslint/no-explicit-any": "warn"
 	}
 }
