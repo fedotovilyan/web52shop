@@ -2,6 +2,7 @@ import cls from "./Header.module.scss";
 import { ProfileBtns } from "./ProfileBtns/ProfileBtns";
 import { GlobalSearch } from "@/features/GlobalSearch";
 import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
+import { CatalogBtn } from "./CatalogBtn/CatalogBtn";
 
 export const Header = () => {
 	return (
@@ -10,9 +11,8 @@ export const Header = () => {
 				<HeaderLogo className={cls.header_logo} />
 			</div>
 			<div className={cls.header_block}>
-				<GlobalSearch
-					containerClassName={cls.search_input_container}
-				/>
+				<CatalogBtn className={cls.catalog_btn} />
+				<GlobalSearch containerClassName={cls.search_input_container} />
 			</div>
 			<div className={cls.header_block}>
 				<ProfileBtns />

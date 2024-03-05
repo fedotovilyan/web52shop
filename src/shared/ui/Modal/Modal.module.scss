@@ -1,0 +1,43 @@
+.modal_container {
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.274);
+	transition: 0.2s opacity ease-in-out;
+	opacity: 0;
+	pointer-events: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.children {
+		background-color: var(--primary-background-color);
+		min-height: 100px;
+		min-width: 100px;
+		border-radius: 10%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: 0.3s scale ease-in-out;
+		scale: 0;
+	}
+
+	&.opened {
+		opacity: 1;
+		pointer-events: auto;
+
+		.children {
+			scale: 1;
+		}
+	}
+}
+
+.close_btn {
+	top: 5px;
+	right: 5px;
+	position: absolute;
+	padding: 0;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+}

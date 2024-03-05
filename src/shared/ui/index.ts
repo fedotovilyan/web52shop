@@ -7,3 +7,4 @@ export * from './Alert/Alert';
 export * from './Loader/Loader';
 export * from './Divider/Divider';
 export * from './Input/SearchInput/SearchInput';
+export * from './Modal/Modal';

@@ -26,6 +26,87 @@ export default function Home() {
 			<Button style={{ marginRight: 15 }} theme={ButtonTheme.Primary}>
 				Hello world
 			</Button>
+			<Alert type={AlertType.Error} closable>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+				distinctio nihil nesciunt! Sunt deleniti delectus, optio aliquam
+				exercitationem quaerat similique necessitatibus sapiente modi sint odio!
+				Modi omnis quia sequi veritatis. Lorem, ipsum dolor sit amet consectetur
+				adipisicing elit. Inventore molestias, odit ullam magnam iure ducimus
+				minima. Commodi illum laboriosam quasi praesentium blanditiis ab,
+				numquam harum facilis labore pariatur, a perferendis!
+			</Alert>
+			<Alert type={AlertType.Error} closable>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+				distinctio nihil nesciunt! Sunt deleniti delectus, optio aliquam
+				exercitationem quaerat similique necessitatibus sapiente modi sint odio!
+				Modi omnis quia sequi veritatis. Lorem, ipsum dolor sit amet consectetur
+				adipisicing elit. Inventore molestias, odit ullam magnam iure ducimus
+				minima. Commodi illum laboriosam quasi praesentium blanditiis ab,
+				numquam harum facilis labore pariatur, a perferendis!
+			</Alert>
+			<Alert type={AlertType.Error} closable>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+				distinctio nihil nesciunt! Sunt deleniti delectus, optio aliquam
+				exercitationem quaerat similique necessitatibus sapiente modi sint odio!
+				Modi omnis quia sequi veritatis. Lorem, ipsum dolor sit amet consectetur
+				adipisicing elit. Inventore molestias, odit ullam magnam iure ducimus
+				minima. Commodi illum laboriosam quasi praesentium blanditiis ab,
+				numquam harum facilis labore pariatur, a perferendis!
+			</Alert>
+			<Alert type={AlertType.Error} closable>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+				distinctio nihil nesciunt! Sunt deleniti delectus, optio aliquam
+				exercitationem quaerat similique necessitatibus sapiente modi sint odio!
+				Modi omnis quia sequi veritatis. Lorem, ipsum dolor sit amet consectetur
+				adipisicing elit. Inventore molestias, odit ullam magnam iure ducimus
+				minima. Commodi illum laboriosam quasi praesentium blanditiis ab,
+				numquam harum facilis labore pariatur, a perferendis!
+			</Alert>
+			<Alert type={AlertType.Error} closable>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+				distinctio nihil nesciunt! Sunt deleniti delectus, optio aliquam
+				exercitationem quaerat similique necessitatibus sapiente modi sint odio!
+				Modi omnis quia sequi veritatis. Lorem, ipsum dolor sit amet consectetur
+				adipisicing elit. Inventore molestias, odit ullam magnam iure ducimus
+				minima. Commodi illum laboriosam quasi praesentium blanditiis ab,
+				numquam harum facilis labore pariatur, a perferendis!
+			</Alert>
+			<Alert type={AlertType.Error} closable>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+				distinctio nihil nesciunt! Sunt deleniti delectus, optio aliquam
+				exercitationem quaerat similique necessitatibus sapiente modi sint odio!
+				Modi omnis quia sequi veritatis. Lorem, ipsum dolor sit amet consectetur
+				adipisicing elit. Inventore molestias, odit ullam magnam iure ducimus
+				minima. Commodi illum laboriosam quasi praesentium blanditiis ab,
+				numquam harum facilis labore pariatur, a perferendis!
+			</Alert>
+			<Alert type={AlertType.Error} closable>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+				distinctio nihil nesciunt! Sunt deleniti delectus, optio aliquam
+				exercitationem quaerat similique necessitatibus sapiente modi sint odio!
+				Modi omnis quia sequi veritatis. Lorem, ipsum dolor sit amet consectetur
+				adipisicing elit. Inventore molestias, odit ullam magnam iure ducimus
+				minima. Commodi illum laboriosam quasi praesentium blanditiis ab,
+				numquam harum facilis labore pariatur, a perferendis!
+			</Alert>
+			<Alert type={AlertType.Error} closable>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+				distinctio nihil nesciunt! Sunt deleniti delectus, optio aliquam
+				exercitationem quaerat similique necessitatibus sapiente modi sint odio!
+				Modi omnis quia sequi veritatis. Lorem, ipsum dolor sit amet consectetur
+				adipisicing elit. Inventore molestias, odit ullam magnam iure ducimus
+				minima. Commodi illum laboriosam quasi praesentium blanditiis ab,
+				numquam harum facilis labore pariatur, a perferendis!
+			</Alert>
+			<Alert type={AlertType.Error} closable>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+				distinctio nihil nesciunt! Sunt deleniti delectus, optio aliquam
+				exercitationem quaerat similique necessitatibus sapiente modi sint odio!
+				Modi omnis quia sequi veritatis. Lorem, ipsum dolor sit amet consectetur
+				adipisicing elit. Inventore molestias, odit ullam magnam iure ducimus
+				minima. Commodi illum laboriosam quasi praesentium blanditiis ab,
+				numquam harum facilis labore pariatur, a perferendis!
+			</Alert>
 		</div>
 	);
 }

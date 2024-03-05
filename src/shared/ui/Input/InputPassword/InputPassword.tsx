@@ -8,12 +8,12 @@ import VisibleSvg from "@/shared/assets/icons/visible.svg";
 import classNames from "classnames";
 import { Button } from "../..";
 
-interface InputPassword extends InputProps {}
+interface InputPasswordProps extends InputProps {}
 
-export const InputPassword: FC<InputPassword> = forwardRef<
+export const InputPassword: FC<InputPasswordProps> = forwardRef<
 	HTMLInputElement,
 	InputProps
->((props, ref) => {
+>(function InputPassword(props, ref) {
 	const { className, ...rest } = props;
 
 	const [visible, setVisible] = useState(false);

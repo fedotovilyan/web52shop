@@ -40,7 +40,7 @@ export const ProfileBtns = () => {
 					Выйти
 				</Button>
 			),
-		},
+		}
 	];
 
 	const onRegisterClick = () => {

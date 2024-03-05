@@ -4,6 +4,7 @@
 	--subtitle-font-size: 19px;
 
 	--header-height: 120px;
+	--header-z-index: 10;
 
 	--main-wrapper-padding: 20px;
 }

@@ -4,7 +4,7 @@
 
 	--link-color: rgba(23, 88, 252, 0.884);
 	--link-color-hovered: rgba(16, 64, 184, 0.884);
-	--link-color-active:rgba(72, 124, 255, 0.884);
+	--link-color-active: rgba(72, 124, 255, 0.884);
 
-	--primary-background-color: rgba(134, 252, 238, 0.202);
+	--primary-background-color: rgb(236, 255, 253);
 }

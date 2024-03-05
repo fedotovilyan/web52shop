@@ -1,13 +1,20 @@
 "use client";
 import { SearchInput, SearchInputProps } from "@/shared/ui";
 import { FC } from "react";
+import cls from "./GlobalSearch.module.scss";
 
-interface GlobalSearch extends SearchInputProps {}
+interface GlobalSearchProps extends SearchInputProps {}
 
-export const GlobalSearch: FC<GlobalSearch> = (props) => {
-
+export const GlobalSearch: FC<GlobalSearchProps> = (props) => {
 	//TODO: realize global searching
 	const onSearch = (search: string) => {};
 
-	return <SearchInput onSearch={onSearch} {...props} />;
+	return (
+		<SearchInput
+			placeholder="Введите что-то для поиска"
+			className={cls.global_search}
+			onSearch={onSearch}
+			{...props}
+		/>
+	);
 };

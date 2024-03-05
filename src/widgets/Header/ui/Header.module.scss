@@ -2,10 +2,12 @@
 	width: 100%;
 	height: var(--header-height);
 	border-bottom: 1px solid rgba(128, 128, 128, 0.127);
-	background-color: #ffffffa3;
+	background-color: #ffffffe2;
 	padding: 5px;
 	display: flex;
 	flex-grow: 1;
+	position: fixed;
+	z-index: var(--header-z-index);
 
 	.navigation_and_searching {
 		display: flex;
@@ -40,4 +42,8 @@
 
 .header_logo {
 	cursor: pointer;
+}
+
+.catalog_btn {
+	margin-right: 25px;
 }

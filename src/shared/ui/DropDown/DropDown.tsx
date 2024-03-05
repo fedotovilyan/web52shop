@@ -1,6 +1,11 @@
 "use client";
 
-import { FC, PropsWithChildren, ReactNode, useState } from "react";
+import {
+	FC,
+	PropsWithChildren,
+	ReactNode,
+	useRef,
+} from "react";
 import cls from "./DropDown.module.scss";
 import classNames from "classnames";
 import DownArrowSvg from "@/shared/assets/icons/down-arrow.svg";
@@ -26,7 +31,9 @@ export const DropDown: FC<DropDownProps> = (props) => {
 		showItems,
 		showItemsWhen = "hovered",
 	} = props;
-	const [hideWhenMouseOut, setHideWhenMouseOut] = useState(false);
+	const closeDropdownTimeout = useRef<
+		ReturnType<typeof setTimeout> | undefined
+	>();
 
 	//TODO: realize click
 	/* const onClick = () => {
@@ -45,12 +52,14 @@ export const DropDown: FC<DropDownProps> = (props) => {
 	const onMouseOver = () => {
 		if (showItemsWhen !== "hovered") return;
 		setShowItems(true);
+		clearTimeout(closeDropdownTimeout.current);
 	};
 
 	const onMouseOut = () => {
 		if (showItemsWhen !== "hovered") return;
-		setShowItems(false);
-		setHideWhenMouseOut(false);
+		closeDropdownTimeout.current = setTimeout(() => {
+			setShowItems(false);
+		}, 350);
 	};
 
 	return (

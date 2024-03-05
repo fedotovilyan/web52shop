@@ -9,5 +9,5 @@ export const ErrorText: FC<ErrorTextProps> = ({ children }) => {
 		<span className={cls.error_text}>
 			{children}
 		</span>
-	)
+	);
 };

@@ -1,6 +1,7 @@
 .Button {
 	padding: 6px;
 	transition: all 0.3s ease-in-out;
+	border-radius: 5px;
 }
 
 .primary {
@@ -35,7 +36,6 @@
 		color: var(--link-color-active);
 	}
 }
-
 
 .transparent {
 	background-color: transparent;
