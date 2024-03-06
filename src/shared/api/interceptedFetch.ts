@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 "use client";
 
-import { store, useAppDispatch } from "@/app/store";
+import { store } from "@/app/store";
 import { isTokenExpired } from "../utils/isTokenExpired";
-import { refreshTokens } from "@/entities/User";
+import { refreshTokens, setAccessToken } from "@/entities/User";
 
 type TInterceptedFetch = (
 	input: URL | RequestInfo,
@@ -20,6 +22,7 @@ export const interceptedFetch: TInterceptedFetch = async (
 	if (isTokenExpired(accessToken)) {
 		token = await dispatch(refreshTokens()).unwrap();
 	}
+	dispatch(setAccessToken(token));
 
 	return fetch(input, {
 		...init,

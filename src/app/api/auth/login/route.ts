@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 		return NextResponse.json(
 			{
 				ok: false,
-				message: e?.message || "Что-то пошло не так на сервере",
+				message: e?.message,
 			},
 			{ status: e?.status || 500 }
 		);

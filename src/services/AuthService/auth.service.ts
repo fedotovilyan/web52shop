@@ -7,6 +7,7 @@ import { GenerateCookiesResponseDTO } from "./dto/GenerateCookiesResponse.dto";
 import { Tokens } from "@/shared/types/Tokens";
 import dayjs from "dayjs";
 import { VerifyTokenResponse } from "../JwtService/dto/VerifyTokenResponse.dto";
+import { headers } from "next/headers";
 
 export class AuthService {
 	static async register({ email, password }: AuthPayloadDTO) {
@@ -67,11 +68,20 @@ export class AuthService {
 		return { email };
 	}
 
-	static verifyToken(token: string, type: Tokens): VerifyTokenResponse {
+	static async verifyUser() {
+		const headersApi = headers();
+		const accessToken = headersApi.get("Authorization")?.split?.(" ")?.[1] || "";
+
+		if (!accessToken) throw ApiError.UnauthorizedException("Вы не авторизованы");
+
+		let email = '';
 		try {
-			return JwtService.verifyToken(token, type);
+			const decoded = JwtService.verifyToken(accessToken, Tokens.Access);
+			email = decoded.email;
 		} catch(e) {
-			throw ApiError.UnauthorizedException("Вы не авторизованы")
+			throw ApiError.UnauthorizedException("Вы не авторизованы");
 		}
+		return await UserService.getUserByEmail(email);
+
 	}
 }

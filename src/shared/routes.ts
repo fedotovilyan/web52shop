@@ -3,6 +3,10 @@ export const WEB_ROUTES = {
 	about: "/about",
 	registration: "/auth/registration",
 	login: "/auth/login",
+
+	adminPanel: {
+		main: '/backoffice'
+	},
 };
 
 export const API_ROUTES = {
@@ -12,4 +16,5 @@ export const API_ROUTES = {
 	refresh: "/api/auth/refresh",
 
 	getCurrentUser: "/api/user/current",
+	updateCurrentUser: "/api/user/current/update"
 };

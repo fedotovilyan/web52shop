@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 "use client";
 
 import {
@@ -13,7 +14,7 @@ import { createPortal } from "react-dom";
 import CrossSvg from "@/shared/assets/icons/cross.svg";
 import { Button, ButtonTheme } from "..";
 
-interface ModalProps extends PropsWithChildren {
+export interface ModalProps extends PropsWithChildren {
 	isOpen: boolean;
 	onClose?: () => void;
 	className?: string;
@@ -39,16 +40,15 @@ export const Modal: FC<ModalProps> = (props) => {
 	return mounted
 		? createPortal(
 				<div
-					className={classNames(
-						cls.modal_container,
-						{
-							[cls.opened]: isOpen,
-						},
-						className
-					)}
+					className={classNames(cls.modal_container, {
+						[cls.opened]: isOpen,
+					})}
 					onClick={onOverlayClick}
 				>
-					<div onClick={onChildrenClick} className={cls.children}>
+					<div
+						onClick={onChildrenClick}
+						className={classNames(cls.children, className)}
+					>
 						{closable && (
 							<Button
 								theme={ButtonTheme.Transparent}
@@ -68,6 +68,6 @@ export const Modal: FC<ModalProps> = (props) => {
 					</div>
 				</div>,
 				document.querySelector(".app") || document.body
-		)
+		  )
 		: null;
 };

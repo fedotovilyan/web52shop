@@ -8,6 +8,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 25px;
 
 	.children {
 		background-color: var(--primary-background-color);
@@ -19,6 +20,7 @@
 		align-items: center;
 		transition: 0.3s scale ease-in-out;
 		scale: 0;
+		padding: 35px;
 	}
 
 	&.opened {
@@ -32,8 +34,8 @@
 }
 
 .close_btn {
-	top: 5px;
-	right: 5px;
+	top: 15px;
+	right: 15px;
 	position: absolute;
 	padding: 0;
 

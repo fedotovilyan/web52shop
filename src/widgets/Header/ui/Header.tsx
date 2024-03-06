@@ -3,6 +3,7 @@ import { ProfileBtns } from "./ProfileBtns/ProfileBtns";
 import { GlobalSearch } from "@/features/GlobalSearch";
 import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
 import { CatalogBtn } from "./CatalogBtn/CatalogBtn";
+import { AdminOptions } from "./AdminOptions/AdminOptions";
 
 export const Header = () => {
 	return (
@@ -17,6 +18,7 @@ export const Header = () => {
 			<div className={cls.header_block}>
 				<ProfileBtns />
 			</div>
+			<AdminOptions />
 		</header>
 	);
 };

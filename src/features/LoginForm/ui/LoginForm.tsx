@@ -1,6 +1,5 @@
 "use client";
-import { Button, Input, InputPassword } from "@/shared/ui";
-import { ErrorText } from "@/shared/ui/ErrorText/ErrorText";
+import { Button, ErrorText, Input, InputPassword } from "@/shared/ui";
 import { FC, FormHTMLAttributes } from "react";
 import { useForm } from "react-hook-form";
 import cls from "./LoginForm.module.scss";

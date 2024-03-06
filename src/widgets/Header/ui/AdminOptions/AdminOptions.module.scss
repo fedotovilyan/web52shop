@@ -1,0 +1,17 @@
+.admin_options_container {
+	position: absolute;
+	bottom: -50px;
+	right: 0;
+}
+
+.btn {
+	height: 50px;
+	background-color: rgba(255, 166, 166, 0.884) !important;
+	color: #fff;
+	clip-path: polygon(0% 20%, 85% 20%, 85% 0, 100% 49%, 85% 100%, 85% 80%, 0 80%);
+
+
+	&:hover {
+		background-color: rgba(254, 130, 130, 0.884) !important;
+	}
+}

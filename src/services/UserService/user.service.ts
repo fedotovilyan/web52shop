@@ -1,6 +1,6 @@
 import { prisma } from "@prisma";
 import { CreateUserPayloadDTO } from "./dto/CreateUserPayload.dto";
-import { UserRole } from "@/entities/User";
+import { IUser, UserRole } from "@/entities/User";
 
 export class UserService {
 	static getUserByEmail(email: string) {
@@ -25,6 +25,18 @@ export class UserService {
 				email: payload.email,
 				password: payload.password,
 				role: UserRole.Visitor,
+			},
+		});
+	}
+
+	static update(id: string, payload: Partial<IUser>) {
+		return prisma.user.update({
+			where: {
+				id,
+			},
+			data: {
+				...payload,
+				updatedAt: new Date(),
 			},
 		});
 	}

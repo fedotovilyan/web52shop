@@ -8,3 +8,4 @@ export * from './Loader/Loader';
 export * from './Divider/Divider';
 export * from './Input/SearchInput/SearchInput';
 export * from './Modal/Modal';
+export * from './ErrorText/ErrorText';

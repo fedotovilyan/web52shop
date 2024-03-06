@@ -8,3 +8,7 @@ export * from './model/services/signIn';
 export * from './model/selectors/selectProfile';
 export * from './model/services/getProfile';
 export * from './model/services/refreshTokens';
+export * from './types/User';
+export * from './types/UserRole';
+export * from './model/selectors/selectProfileData';
+export * from './model/services/updateProfile';

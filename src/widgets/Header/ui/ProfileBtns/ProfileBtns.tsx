@@ -1,18 +1,14 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import {
-	logout,
-	selectAccessToken,
-	selectAuthData,
-	selectProfile,
-} from "@/entities/User";
+import { logout, selectProfile } from "@/entities/User";
 import { WEB_ROUTES } from "@/shared/routes";
 import { Button, ButtonTheme } from "@/shared/ui";
 import { useRouter } from "next/navigation";
 import cls from "./ProfileBtns.module.scss";
 import { DropDown, DropdownItem } from "@/shared/ui/DropDown/DropDown";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { ProfileFormModal } from "@/widgets/ProfileFormModal";
 
 export const ProfileBtns = () => {
 	const {
@@ -21,6 +17,9 @@ export const ProfileBtns = () => {
 	const dispatch = useAppDispatch();
 	const router = useRouter();
 	const [showDropdown, setShowDropdown] = useState(false);
+	const [isProfileModalOpened, setIsProfileModalOpened] = useState(false);
+	const [isProfileModalMounted, setIsProfileModalMounted] = useState(false);
+	const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>();
 
 	const onLogoutClick = () => {
 		dispatch(logout())
@@ -28,7 +27,27 @@ export const ProfileBtns = () => {
 			.then(() => window.location.reload());
 	};
 
+	const onProfileClick = () => {
+		if (timeoutRef.current) {
+			clearTimeout(timeoutRef.current);
+		}
+		setIsProfileModalMounted(true);
+		setIsProfileModalOpened(true);
+	};
+
 	const dropDownItems: DropdownItem[] = [
+		{
+			key: "profile",
+			item: (
+				<Button
+					className={cls.logout_btn}
+					onClick={onProfileClick}
+					theme={ButtonTheme.Link}
+				>
+					Профиль
+				</Button>
+			),
+		},
 		{
 			key: "logout",
 			item: (
@@ -40,7 +59,7 @@ export const ProfileBtns = () => {
 					Выйти
 				</Button>
 			),
-		}
+		},
 	];
 
 	const onRegisterClick = () => {
@@ -71,6 +90,17 @@ export const ProfileBtns = () => {
 						Регистрация
 					</Button>
 				</div>
+			)}
+			{isProfileModalMounted && (
+				<ProfileFormModal
+					isOpen={isProfileModalOpened}
+					onClose={() => {
+						setIsProfileModalOpened(false);
+						timeoutRef.current = setTimeout(() => {
+							setIsProfileModalMounted(false);
+						}, 1000);
+					}}
+				/>
 			)}
 		</div>
 	);

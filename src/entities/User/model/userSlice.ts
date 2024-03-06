@@ -7,12 +7,15 @@ import { logout } from "./services/logout";
 import { signIn } from "./services/signIn";
 import { refreshTokens } from "./services/refreshTokens";
 import { getProfile } from "./services/getProfile";
+import { Refresh } from "@/shared/api/Auth";
+import { updateProfile } from "./services/updateProfile";
 
 export interface UserState {
 	auth: {
 		loading: boolean;
 		error: string | null | undefined;
 		accessToken: string | null;
+		refreshPromise: undefined | ReturnType<typeof Refresh>;
 	};
 	profile: {
 		loading: boolean;
@@ -27,6 +30,7 @@ const initialState: UserState = {
 		loading: false,
 		error: null,
 		accessToken: null,
+		refreshPromise: undefined,
 	},
 	profile: {
 		loading: false,
@@ -41,6 +45,12 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		resetState: () => initialState,
+		setRefreshPromise: (
+			state,
+			{ payload }: PayloadAction<ReturnType<typeof Refresh> | undefined>
+		) => {
+			state.auth.refreshPromise = payload;
+		},
 		setAccessToken: (state, { payload }: PayloadAction<string | null>) => {
 			state.auth.accessToken = payload;
 		},
@@ -120,6 +130,19 @@ export const userSlice = createSlice({
 			.addCase(getProfile.rejected, (state, { payload }) => {
 				state.profile.error = payload;
 				state.profile.isProfileFetching = false;
+			});
+
+		builder
+			.addCase(updateProfile.pending, (state) => {
+				state.profile.loading = true;
+			})
+			.addCase(updateProfile.fulfilled, (state, { payload }) => {
+				state.profile.profileData = payload;
+				state.profile.loading = false;
+			})
+			.addCase(updateProfile.rejected, (state, { payload }) => {
+				state.profile.error = payload;
+				state.profile.loading = false;
 			});
 	},
 });

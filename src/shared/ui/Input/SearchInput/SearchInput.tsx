@@ -15,8 +15,6 @@ export interface SearchInputProps extends InputProps {
 
 export const SearchInput: FC<SearchInputProps> = (props) => {
 	const { onSearch, className, onChange, containerClassName, ...rest } = props;
-	console.log(className);
-	console.log(containerClassName);
 	const [value, setValue] = useState("");
 
 	const onKeyDownInput: KeyboardEventHandler<HTMLInputElement> = (e) => {
