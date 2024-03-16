@@ -13,6 +13,10 @@ export const store = configureStore({
 	reducer: {
 		user: userSlice?.reducer,
 	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}),
 });
 
 export type AppStore = typeof store;

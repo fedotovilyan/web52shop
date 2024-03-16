@@ -1,21 +1,12 @@
 import { prisma } from "@prisma";
 import { CreateUserPayloadDTO } from "./dto/CreateUserPayload.dto";
-import { IUser, UserRole } from "@/entities/User";
+import { UserRole, IUser } from "@/shared/models/User";
+import { Prisma } from '@prisma/client';
 
 export class UserService {
-	static getUserByEmail(email: string) {
+	static findUser(where: Prisma.UserWhereUniqueInput) {
 		return prisma.user.findUnique({
-			where: {
-				email,
-			},
-		});
-	}
-
-	static getUserByPhone(phone: string) {
-		return prisma.user.findUnique({
-			where: {
-				phone,
-			},
+			where,
 		});
 	}
 

@@ -1,39 +1,36 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { Tokens } from "./shared/types/Tokens";
-import { JwtService } from "./services/JwtService/jwt.service";
-import { notFound } from 'next/navigation';
-import { IUser } from "./entities/User/types/User";
-import { UserService } from "./services/UserService/user.service";
-import { UserRole } from "./entities/User";
+import { IUser, UserRole } from "./shared/models/User";
+import { GetCurrentUser } from "./shared/api/User";
+import { APP_URL } from "./shared/constants";
 
 export async function middleware(request: NextRequest) {
 	const { url, cookies } = request;
 
-	const refreshToken = cookies.get(Tokens.Refresh)?.value || "";
-	const user: Partial<IUser> = {
-		email: "",
-	};
+	const accessToken = cookies.get(Tokens.Access)?.value || "";
+	let user: IUser | undefined;
 	try {
-		const decoded = JwtService.verifyToken(refreshToken, Tokens.Refresh);
-		user.email = decoded.email;
+		user = await GetCurrentUser(accessToken, APP_URL);
 	} catch (e) {
-		return notFound();
+		console.log(e);
+		return NextResponse.rewrite(new URL("/404", request.url));
 	}
 
-	const res = await UserService.getUserByEmail(user.email);
-	user.role = res?.role as UserRole;
-
-	const isAdminPanel = url.includes("/backoffice");
+	const isAdminPanel = url.includes("/panel");
 	const isDashBoard = url.includes("/dashboard");
 
-	if ((isAdminPanel || isDashBoard) && user.role !== UserRole.Admin) {
-		return notFound();
+	console.log("middleware");
+	console.log(user);
+
+	if ((isAdminPanel || isDashBoard) && user?.role !== UserRole.Admin) {
+		console.log("notFound");
+		return NextResponse.rewrite(new URL("/404", request.url));
 	}
 
 	return NextResponse.next();
 }
 
 export const config = {
-	matcher: ["/backoffice/:path*", "/dashboard/:path*"],
+	matcher: ["/panel/:path*", "/dashboard/:path*"],
 };

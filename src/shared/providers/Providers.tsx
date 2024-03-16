@@ -1,10 +1,7 @@
-import { PropsWithChildren } from "react"
-import StoreProvider from "./StoreProvider"
+"use client";
+import { PropsWithChildren } from "react";
+import StoreProvider from "./StoreProvider";
 
 export const Providers = ({ children }: PropsWithChildren) => {
-	return (
-		<StoreProvider>
-			{children}
-		</StoreProvider>
-	)
-} 
+	return <StoreProvider>{children}</StoreProvider>;
+};

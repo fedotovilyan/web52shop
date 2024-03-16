@@ -1,5 +1,3 @@
-import { UserRole } from "..";
-
 export interface IUser {
 	id: string;
 	phone: string;
@@ -7,4 +5,11 @@ export interface IUser {
 	first_name: string;
 	last_name: string;
 	role: UserRole;
+	createdAt: string;
+	updatedAt: string;
+}
+
+export enum UserRole {
+	Admin = "admin",
+	Visitor = "visitor",
 }

@@ -2,6 +2,7 @@ import { AuthService } from "@/services/AuthService/auth.service";
 import { NextResponse } from "next/server";
 import { UpdateUserBodyDTO } from "./dto";
 import { UserService } from "@/services/UserService/user.service";
+import { revalidateTag } from "next/cache";
 
 export async function PATCH(req: Request) {
 	try {
@@ -16,6 +17,7 @@ export async function PATCH(req: Request) {
 		}
 
 		const response = await UserService.update(user.id, body);
+		revalidateTag("profile");
 
 		return NextResponse.json({
 			ok: true,

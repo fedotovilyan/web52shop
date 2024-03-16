@@ -6,20 +6,15 @@ import { ReactNode, useEffect } from "react";
 import { Loader } from "@/shared/ui";
 
 export default function Template({ children }: { children: ReactNode }) {
-	const {
-		profileData: { email },
-		isProfileFetching,
-	} = useAppSelector(selectProfile);
 	const dispatch = useAppDispatch();
-
+	const { isProfileFetching, profileData } = useAppSelector(selectProfile);
+	console.log(profileData);
 	useEffect(() => {
-		if (!email) {
-			dispatch(getProfile());
-		}
-	}, [dispatch, email]);
+		dispatch(getProfile());
+	}, [dispatch]);
 
 	if (isProfileFetching) {
-		return <Loader spinning fullscreen />;
+		return <Loader fullscreen spinning />;
 	}
 
 	return <>{children}</>;

@@ -1,12 +1,13 @@
 "use client";
 
 import { useAppSelector } from "@/app/store";
-import { UserRole, selectProfile } from "@/entities/User";
+import { selectProfile } from "@/entities/User";
 import { FC } from "react";
 import cls from "./AdminOptions.module.scss";
 import { useRouter } from "next/navigation";
 import { Button } from "@/shared/ui";
 import { WEB_ROUTES } from "@/shared/routes";
+import { UserRole } from "@/shared/models/User";
 
 export const AdminOptions: FC = () => {
 	const {

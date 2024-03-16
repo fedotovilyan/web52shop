@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { Philosopher } from "next/font/google";
-import "./globals.css";
-import "@/shared/styles/themes/light.css";
+import "./globals.scss";
+import "@/shared/styles/themes/light.scss";
 import { Providers } from "@/shared/providers/Providers";
 import { ReactNode } from "react";
 
-const inter = Philosopher({ weight: "400", subsets: ['cyrillic', 'cyrillic-ext', 'latin' ] });
+const inter = Philosopher({
+	weight: "400",
+	subsets: ["cyrillic", "cyrillic-ext", "latin"],
+});
 
 export const metadata: Metadata = {
 	title: "Create Next App",

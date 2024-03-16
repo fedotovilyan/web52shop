@@ -11,10 +11,10 @@ export async function POST(req: Request) {
 	const body = (await req.json()) as IBody;
 
 	try {
-		const { email } = await AuthService.login(body);
+		const { id } = await AuthService.login(body);
 
-		const { accessCookie, refreshCookie } = AuthService.generateCookies({
-			email,
+		const { accessCookie, refreshCookie } = await AuthService.generateCookies({
+			userId: id,
 		});
 
 		const cookiesApi = cookies();

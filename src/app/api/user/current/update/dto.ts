@@ -1,4 +1,4 @@
-import { IUser } from "@/entities/User";
+import { IUser } from "@/shared/models/User";
 
 export type UpdateUserBodyDTO = Partial<IUser>;
 

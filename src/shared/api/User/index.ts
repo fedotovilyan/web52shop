@@ -1,20 +1,30 @@
 import type { GetCurrentUserResponseDTO } from "@/app/api/user/current/dto";
 import { API_ROUTES } from "@/shared/routes";
 import { interceptedFetch } from "../interceptedFetch";
-import { IUser } from "@/entities/User";
 import { UpdateUserResponseDTO } from "@/app/api/user/current/update/dto";
+import { IUser } from "@/shared/models/User";
+import { APP_URL } from "@/shared/constants";
 
 export async function GetCurrentUser(
-	accessToken: string
+	accessToken: string,
+	baseUrl: string = '',
 ): Promise<GetCurrentUserResponseDTO> {
-	const res = await interceptedFetch(API_ROUTES.getCurrentUser, accessToken, {
-		method: "GET",
-		cache: "no-store",
-	});
+	console.log(APP_URL);
+	const res = await interceptedFetch(
+		`${baseUrl}${API_ROUTES.getCurrentUser}`,
+		accessToken,
+		{
+			method: "GET",
+
+			next: {
+				tags: ["profile"],
+			},
+		}
+	);
 
 	const body = await res.json();
 
-	if (res.status !== 200) {
+	if (!body.ok) {
 		throw new Error(body.message);
 	}
 
@@ -37,7 +47,7 @@ export async function UpdateCurrentUser(
 
 	const body = await res.json();
 
-	if (res.status !== 200) {
+	if (!body.ok) {
 		throw new Error(body.message);
 	}
 

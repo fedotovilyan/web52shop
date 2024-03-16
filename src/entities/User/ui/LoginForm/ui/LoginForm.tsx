@@ -7,22 +7,28 @@ import classNames from "classnames";
 import { emailRegexp } from "@/shared/constants";
 
 export type LoginFormInputs = {
+	confirm_password?: string;
 	password: string;
 	email: string;
 };
 
 interface LoginFormProps extends FormHTMLAttributes<HTMLFormElement> {
 	onFormSubmit: (data: LoginFormInputs) => void;
+	isRegistration?: boolean;
 }
 
 export const LoginForm: FC<LoginFormProps> = (props) => {
-	const { onFormSubmit, ...rest } = props;
+	const { onFormSubmit, isRegistration, ...rest } = props;
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
+		setError,
+		clearErrors,
+		watch
 	} = useForm<LoginFormInputs>();
+	const password = watch('password');
 
 	return (
 		<form
@@ -30,7 +36,7 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
 			onSubmit={handleSubmit(onFormSubmit)}
 			{...rest}
 		>
-			<div className={cls.email_wrapper}>
+			<div className={cls.form_item}>
 				<label htmlFor="email">Email:</label>
 				<Input
 					id="email"
@@ -50,7 +56,7 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
 				/>
 				{errors.email && <ErrorText>{errors.email.message}</ErrorText>}
 			</div>
-			<div className={cls.pass_wrapper}>
+			<div className={cls.form_item}>
 				<label htmlFor="password">Пароль:</label>
 				<InputPassword
 					id="password"
@@ -70,10 +76,42 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
 						[cls.err_input]: !!errors.password,
 					})}
 					aria-invalid={errors.password ? "true" : "false"}
+					autoComplete={isRegistration ? "new-password" : undefined}
 					placeholder="Пароль"
 				/>
 				{errors.password && <ErrorText>{errors.password.message}</ErrorText>}
 			</div>
+			{isRegistration && (
+				<div className={cls.form_item}>
+					<label htmlFor="confirm_password">Подтвердить пароль:</label>
+					<InputPassword
+						id="confirm_password"
+						{...register("confirm_password", {
+							required: "Подтвердите пароль!",
+						})}
+						className={classNames({
+							[cls.password_input]: true,
+							[cls.err_input]: !!errors.confirm_password,
+						})}
+						aria-invalid={errors.confirm_password ? "true" : "false"}
+						placeholder="Подтвердить пароль"
+						autoComplete={isRegistration ? "new-password" : undefined}
+						onChange={(e) => {
+							const value = e.target.value;
+							if (value !== password) {
+								setError("confirm_password", {
+									message: "Пароли не совпадают",
+								});
+							} else {
+								clearErrors("confirm_password");
+							}
+						}}
+					/>
+					{errors.confirm_password && (
+						<ErrorText>{errors.confirm_password.message}</ErrorText>
+					)}
+				</div>
+			)}
 			<Button className={cls.submit_btn} type="submit">
 				Далее
 			</Button>

@@ -1,10 +1,10 @@
 "use client";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IUser } from "../../types/User";
 import { GetCurrentUser } from "@/shared/api/User";
 import { RootState } from "@/app/store";
 import { Tokens } from "@/shared/types/Tokens";
 import { getCookie } from "cookies-next";
+import { IUser } from "@/shared/models/User";
 
 export const getProfile = createAsyncThunk<
 	IUser,

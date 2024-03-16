@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
-import Logo from "@/shared/assets/logo.png";
-import { FC, ImgHTMLAttributes } from "react";
+import { FC } from "react";
 import { useRouter } from "next/navigation";
 import { WEB_ROUTES } from "@/shared/routes";
 
@@ -19,8 +18,8 @@ export const HeaderLogo: FC<HeaderLogoProps> = (props) => {
 		<Image
 			onClick={onLogoClick}
 			width={200}
-			height={100}
-			src={Logo}
+			height={130}
+			src={"/fulllogo.png"}
 			alt=""
 			{...props}
 		/>

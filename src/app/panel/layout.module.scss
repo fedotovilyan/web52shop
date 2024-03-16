@@ -1,0 +1,30 @@
+.layout {
+	--sidebar-width: 200px;
+	--header-height: 70px;
+	--collapsed-sidebar-width: 70px;
+
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr;
+	grid-template-areas: "header header" "sidebar content" "footer footer";
+	height: 100vh;
+	background-color: rgba(238, 253, 251, 0.877);
+}
+
+.header {
+	grid-area: header;
+}
+
+.sidebar {
+	grid-area: sidebar;
+}
+
+.content_wrapper {
+	grid-area: content;
+	padding: 25px;
+
+	.content {
+		background-color: var(--primary-background-color);
+		height: 100%;
+	}
+}

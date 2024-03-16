@@ -5,7 +5,7 @@ export const WEB_ROUTES = {
 	login: "/auth/login",
 
 	adminPanel: {
-		main: '/backoffice'
+		main: "/panel",
 	},
 };
 

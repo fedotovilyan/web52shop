@@ -4,7 +4,7 @@ import { Alert, Divider, Loader, Modal, ModalProps } from "@/shared/ui";
 import { FC, useState } from "react";
 import cls from "./ProfileFormModal.module.scss";
 import classNames from "classnames";
-import { ProfileForm, ProfileFormInputs } from "@/features/ProfileForm";
+import { ProfileForm, ProfileFormInputs } from "@/entities/User/ui/ProfileForm";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { selectProfile, updateProfile } from "@/entities/User";
 import { AlertType } from "@/shared/types/AlertType";
@@ -15,12 +15,11 @@ interface ProfileFormModalProps extends ModalProps {
 
 export const ProfileFormModal: FC<ProfileFormModalProps> = (props) => {
 	const { className, ...rest } = props;
-	const { error, profileData, loading} = useAppSelector(selectProfile);
+	const { error, profileData, loading } = useAppSelector(selectProfile);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const dispatch = useAppDispatch();
 
 	const onFormSubmit = (user: ProfileFormInputs) => {
-		console.log(user);
 		dispatch(updateProfile(user))
 			.unwrap()
 			.then(() => {

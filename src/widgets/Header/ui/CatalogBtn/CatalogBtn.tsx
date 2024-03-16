@@ -30,7 +30,7 @@ export const CatalogBtn: FC<CatalogBtnProps> = ({ className }) => {
 				</div>
 			</Button>
 			<Modal isOpen={isCatalogOpened} onClose={() => setIsCatalogOpened(false)}>
-				Katalog
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quasi ad est distinctio maxime et explicabo inventore? Dicta, dolore tempore consectetur eum laborum ab repudiandae vero ullam quia nam debitis! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim soluta quis asperiores distinctio nobis rem accusantium possimus ea! Ipsa, nesciunt quidem. Perspiciatis, eaque nulla! Officiis optio doloribus dolorem obcaecati.
 			</Modal>
 		</div>
 	);

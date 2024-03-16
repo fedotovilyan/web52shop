@@ -1,0 +1,27 @@
+.sidebar {
+	width: var(--sidebar-width);
+	background-color: var(--secondary-background-color);
+	padding: 20px;
+	transition: 0.3s width ease;
+}
+
+.collapsed {
+	width: var(--collapsed-sidebar-width);
+}
+
+.logo {
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.collapse_btn {
+	position: absolute;
+	width: 35;
+	right: -35px;
+	top: 0px;
+	border: 1px solid rgba(236, 236, 236, 0.822);
+	background-color: rgba(236, 236, 236, 0.822);
+}

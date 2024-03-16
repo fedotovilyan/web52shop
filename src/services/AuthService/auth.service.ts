@@ -6,15 +6,15 @@ import { JwtService } from "../JwtService/jwt.service";
 import { GenerateCookiesResponseDTO } from "./dto/GenerateCookiesResponse.dto";
 import { Tokens } from "@/shared/types/Tokens";
 import dayjs from "dayjs";
-import { VerifyTokenResponse } from "../JwtService/dto/VerifyTokenResponse.dto";
 import { headers } from "next/headers";
+import { IUser } from "@/shared/models/User";
 
 export class AuthService {
 	static async register({ email, password }: AuthPayloadDTO) {
 		if (!email || !password)
 			throw ApiError.BadRequestException("Отсутствует email или пароль!");
 
-		const isEmailAvailable = !(await UserService.getUserByEmail(email));
+		const isEmailAvailable = !(await UserService.findUser({ email }));
 
 		if (!isEmailAvailable)
 			throw ApiError.BadRequestException("Введенный вами email уже занят!");
@@ -27,12 +27,14 @@ export class AuthService {
 		return UserService.registerUser({ email, password: hash });
 	}
 
-	static generateCookies({
-		email,
+	static async generateCookies({
+		userId,
 	}: {
-		email: AuthPayloadDTO["email"];
-	}): GenerateCookiesResponseDTO {
-		const { accessToken, refreshToken } = JwtService.generateTokens({ email });
+		userId: IUser["id"];
+	}): Promise<GenerateCookiesResponseDTO> {
+		const { accessToken, refreshToken } = JwtService.generateTokens({
+			userId,
+		});
 
 		const accessCookie = {
 			name: Tokens.Access,
@@ -58,30 +60,31 @@ export class AuthService {
 		if (!email || !password)
 			throw ApiError.BadRequestException("Отсутствует email или пароль!");
 
-		const user = await UserService.getUserByEmail(email);
+		const user = await UserService.findUser({ email });
 		const isPassMatch = await bcrypt.compare(password, user?.password || "");
 
 		if (!user || !isPassMatch) {
 			throw ApiError.BadRequestException("Введен неверный email или пароль!");
 		}
 
-		return { email };
+		return user;
 	}
 
 	static async verifyUser() {
 		const headersApi = headers();
-		const accessToken = headersApi.get("Authorization")?.split?.(" ")?.[1] || "";
+		const accessToken =
+			headersApi.get("Authorization")?.split?.(" ")?.[1] || "";
 
-		if (!accessToken) throw ApiError.UnauthorizedException("Вы не авторизованы");
+		if (!accessToken)
+			throw ApiError.UnauthorizedException("Вы не авторизованы");
 
-		let email = '';
+		let userId = "";
 		try {
 			const decoded = JwtService.verifyToken(accessToken, Tokens.Access);
-			email = decoded.email;
-		} catch(e) {
+			userId = decoded.userId;
+		} catch (e) {
 			throw ApiError.UnauthorizedException("Вы не авторизованы");
 		}
-		return await UserService.getUserByEmail(email);
-
+		return await UserService.findUser({ id: userId });
 	}
 }

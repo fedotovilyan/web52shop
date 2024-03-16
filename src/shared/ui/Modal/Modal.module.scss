@@ -14,7 +14,7 @@
 		background-color: var(--primary-background-color);
 		min-height: 100px;
 		min-width: 100px;
-		border-radius: 10%;
+		border-radius: 15px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -34,8 +34,8 @@
 }
 
 .close_btn {
-	top: 15px;
-	right: 15px;
+	top: 12px;
+	right: 12px;
 	position: absolute;
 	padding: 0;
 

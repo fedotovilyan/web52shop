@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginForm, LoginFormInputs } from "@/features/LoginForm";
+import { LoginForm, LoginFormInputs } from "@/entities/User/ui/LoginForm";
 import { FC, HTMLAttributes, useEffect, useState } from "react";
 import cls from "./SignIn.module.scss";
 import { Alert, Divider, Loader } from "@/shared/ui";

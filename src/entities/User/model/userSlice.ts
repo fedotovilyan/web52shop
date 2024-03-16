@@ -1,7 +1,7 @@
 "use client";
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../types/User";
+import { IUser } from "../../../shared/models/User";
 import { startRegistration } from "./services/startRegistration";
 import { logout } from "./services/logout";
 import { signIn } from "./services/signIn";
@@ -68,6 +68,7 @@ export const userSlice = createSlice({
 				};
 				state.auth.accessToken = payload.accessToken;
 				state.auth.loading = false;
+				state.auth.error = null;
 			})
 			.addCase(startRegistration.rejected, (state, { payload }) => {
 				state.auth.error = payload;
@@ -80,13 +81,13 @@ export const userSlice = createSlice({
 				state.auth.error = null;
 			})
 			.addCase(signIn.fulfilled, (state, { payload }) => {
-				console.log("fullfiled signIn");
 				state.profile.profileData = {
 					...state.profile.profileData,
 					email: payload.email,
 				};
 				state.auth.accessToken = payload.accessToken;
 				state.auth.loading = false;
+				state.auth.error = null;
 			})
 			.addCase(signIn.rejected, (state, { payload }) => {
 				state.auth.error = payload;
@@ -113,6 +114,7 @@ export const userSlice = createSlice({
 			.addCase(refreshTokens.fulfilled, (state, { payload }) => {
 				state.auth.accessToken = payload;
 				state.auth.loading = false;
+				state.auth.error = null;
 			})
 			.addCase(refreshTokens.rejected, (state, { payload }) => {
 				state.auth.error = payload;
@@ -126,6 +128,7 @@ export const userSlice = createSlice({
 			.addCase(getProfile.fulfilled, (state, { payload }) => {
 				state.profile.profileData = payload;
 				state.profile.isProfileFetching = false;
+				state.profile.error = null;
 			})
 			.addCase(getProfile.rejected, (state, { payload }) => {
 				state.profile.error = payload;
@@ -139,6 +142,7 @@ export const userSlice = createSlice({
 			.addCase(updateProfile.fulfilled, (state, { payload }) => {
 				state.profile.profileData = payload;
 				state.profile.loading = false;
+				state.profile.error = null;
 			})
 			.addCase(updateProfile.rejected, (state, { payload }) => {
 				state.profile.error = payload;
@@ -147,4 +151,5 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { resetState, setAccessToken } = userSlice.actions;
+export const { resetState, setAccessToken, setRefreshPromise } =
+	userSlice.actions;

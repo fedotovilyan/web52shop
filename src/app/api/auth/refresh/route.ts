@@ -8,12 +8,12 @@ export async function GET(req: Request) {
 	const cookiesApi = cookies();
 	const refreshToken = cookiesApi.get(Tokens.Refresh)?.value || "";
 	const user = {
-		email: "",
+		id: "",
 	};
 
 	try {
 		const decoded = JwtService.verifyToken(refreshToken, Tokens.Refresh);
-		user.email = decoded.email;
+		user.id = decoded.userId;
 	} catch (e) {
 		return NextResponse.json(
 			{
@@ -25,8 +25,8 @@ export async function GET(req: Request) {
 	}
 
 	try {
-		const { accessCookie, refreshCookie } = AuthService.generateCookies({
-			email: user.email,
+		const { accessCookie, refreshCookie } = await AuthService.generateCookies({
+			userId: user.id,
 		});
 
 		cookiesApi.set(accessCookie);

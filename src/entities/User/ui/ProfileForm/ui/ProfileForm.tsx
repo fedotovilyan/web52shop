@@ -2,11 +2,11 @@
 
 import { FC, FormHTMLAttributes, useEffect } from "react";
 import cls from "./ProfileForm.module.scss";
-import { IUser } from "@/entities/User";
 import { emailRegexp, phoneRegexp } from "@/shared/constants";
 import { Input, ErrorText, Button, InputPhone } from "@/shared/ui";
 import classNames from "classnames";
 import { useForm } from "react-hook-form";
+import { IUser } from "@/shared/models/User";
 
 export type ProfileFormInputs = Pick<
 	IUser,
@@ -30,7 +30,6 @@ export const ProfileForm: FC<ProfileFormProps> = (props) => {
 	useEffect(() => {
 		if (initialValues) {
 			Object.entries(initialValues).forEach(([key, val]) => {
-				console.log(key, val);
 				setValue(key as keyof ProfileFormInputs, val, { shouldValidate: true });
 			});
 		}

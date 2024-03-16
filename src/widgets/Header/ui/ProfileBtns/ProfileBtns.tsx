@@ -7,8 +7,8 @@ import { Button, ButtonTheme } from "@/shared/ui";
 import { useRouter } from "next/navigation";
 import cls from "./ProfileBtns.module.scss";
 import { DropDown, DropdownItem } from "@/shared/ui/DropDown/DropDown";
-import { useRef, useState } from "react";
-import { ProfileFormModal } from "@/widgets/ProfileFormModal";
+import { useState } from "react";
+import { ProfileFormModal } from "@/features/ProfileFormModal";
 
 export const ProfileBtns = () => {
 	const {
@@ -18,8 +18,6 @@ export const ProfileBtns = () => {
 	const router = useRouter();
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [isProfileModalOpened, setIsProfileModalOpened] = useState(false);
-	const [isProfileModalMounted, setIsProfileModalMounted] = useState(false);
-	const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>();
 
 	const onLogoutClick = () => {
 		dispatch(logout())
@@ -28,10 +26,6 @@ export const ProfileBtns = () => {
 	};
 
 	const onProfileClick = () => {
-		if (timeoutRef.current) {
-			clearTimeout(timeoutRef.current);
-		}
-		setIsProfileModalMounted(true);
 		setIsProfileModalOpened(true);
 	};
 
@@ -91,17 +85,12 @@ export const ProfileBtns = () => {
 					</Button>
 				</div>
 			)}
-			{isProfileModalMounted && (
-				<ProfileFormModal
-					isOpen={isProfileModalOpened}
-					onClose={() => {
-						setIsProfileModalOpened(false);
-						timeoutRef.current = setTimeout(() => {
-							setIsProfileModalMounted(false);
-						}, 1000);
-					}}
-				/>
-			)}
+			<ProfileFormModal
+				isOpen={isProfileModalOpened}
+				onClose={() => {
+					setIsProfileModalOpened(false);
+				}}
+			/>
 		</div>
 	);
 };

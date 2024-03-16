@@ -1,0 +1,25 @@
+.header {
+	height: var(--header-height);
+	background-color: var(--secondary-background-color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px;
+	border-bottom: 1px solid rgba(128, 128, 128, 0.127);
+
+	.header_start {
+		display: flex;
+		gap: 15px;
+	}
+}
+
+.user {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	text-align: center;
+}
+
+.logo {
+	cursor: pointer;
+}

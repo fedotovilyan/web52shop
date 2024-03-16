@@ -1,10 +1,10 @@
 "use client";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IUser } from "../../types/User";
 import { Tokens } from "@/shared/types/Tokens";
 import { getCookie } from "cookies-next";
 import { RegisterUser } from "@/shared/api/Auth";
+import { IUser } from "@/shared/models/User";
 
 export const startRegistration = createAsyncThunk<
 	Pick<IUser, "email"> & { accessToken: string },

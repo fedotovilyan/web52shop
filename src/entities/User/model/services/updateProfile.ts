@@ -1,11 +1,11 @@
 "use client";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IUser } from "../../types/User";
+import { IUser } from "../../../../shared/models/User";
 import { UpdateCurrentUser } from "@/shared/api/User";
 import { RootState } from "@/app/store";
 import { Tokens } from "@/shared/types/Tokens";
 import { getCookie } from "cookies-next";
-import { ProfileFormInputs } from "@/features/ProfileForm";
+import { ProfileFormInputs } from "@/entities/User/ui/ProfileForm";
 
 export const updateProfile = createAsyncThunk<
 	IUser,
@@ -17,7 +17,8 @@ export const updateProfile = createAsyncThunk<
 		const accessToken: string | null =
 			state.user.auth.accessToken || getCookie(Tokens.Access) || "";
 
-		return await UpdateCurrentUser(profile, accessToken);
+		const res = await UpdateCurrentUser(profile, accessToken);
+		return res;
 	} catch (e: any) {
 		return thunkApi.rejectWithValue(e.message);
 	}

@@ -2,7 +2,7 @@
 import { AppDispatch, RootState } from "@/app/store";
 import { Refresh, RefreshErrors } from "@/shared/api/Auth";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { resetState } from "../userSlice";
+import { resetState, setRefreshPromise } from "../userSlice";
 import { Tokens } from "@/shared/types/Tokens";
 import { getCookie } from "cookies-next";
 
@@ -18,8 +18,10 @@ export const refreshTokens = createAsyncThunk<
 	try {
 		if (!refreshPromise) {
 			refreshPromise = Refresh();
+			dispatch(setRefreshPromise(refreshPromise));
 		}
 		await refreshPromise;
+		dispatch(setRefreshPromise(undefined));
 		return getCookie(Tokens.Access) || "";
 	} catch (e: any) {
 		if (e.message === RefreshErrors.TokensIsExpired) {

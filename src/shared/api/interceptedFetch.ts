@@ -21,8 +21,8 @@ export const interceptedFetch: TInterceptedFetch = async (
 	let token = accessToken;
 	if (isTokenExpired(accessToken)) {
 		token = await dispatch(refreshTokens()).unwrap();
+		dispatch(setAccessToken(token));
 	}
-	dispatch(setAccessToken(token));
 
 	return fetch(input, {
 		...init,

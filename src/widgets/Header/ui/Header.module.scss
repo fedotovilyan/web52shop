@@ -2,7 +2,7 @@
 	width: 100%;
 	height: var(--header-height);
 	border-bottom: 1px solid rgba(128, 128, 128, 0.127);
-	background-color: #ffffffe2;
+	background-color: var(--secondary-color);
 	padding: 5px;
 	display: flex;
 	flex-grow: 1;
