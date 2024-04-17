@@ -81,7 +81,6 @@ export const Alert: FC<AlertProps> = (props) => {
 					onClick={onClose}
 				>
 					<CrossSvg
-						fill="#faad14"
 						alt=""
 						width={20}
 						height={20}

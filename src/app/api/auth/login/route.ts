@@ -1,6 +1,7 @@
 import { AuthService } from "@/services/AuthService/auth.service";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { JwtService } from "@/services/JwtService/jwt.service";
 
 interface IBody {
 	email: string;
@@ -13,17 +14,17 @@ export async function POST(req: Request) {
 	try {
 		const { id } = await AuthService.login(body);
 
-		const { accessCookie, refreshCookie } = await AuthService.generateCookies({
+		const { accessToken, refreshToken } = JwtService.generateTokens({
 			userId: id,
 		});
+		const { refreshCookie } = await AuthService.generateCookies({ accessToken, refreshToken });
 
 		const cookiesApi = cookies();
-		cookiesApi.set(accessCookie);
 		cookiesApi.set(refreshCookie);
 
 		return NextResponse.json({
 			ok: true,
-			message: "Вход выполнен успешно",
+			accessToken,
 		});
 	} catch (e: any) {
 		return NextResponse.json(

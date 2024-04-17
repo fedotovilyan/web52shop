@@ -9,17 +9,20 @@ import {
 	useStore,
 } from "react-redux";
 
-export const store = configureStore({
-	reducer: {
-		user: userSlice?.reducer,
-	},
-	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware({
-			serializableCheck: false,
-		}),
-});
+export const makeStore = () => {
+	return configureStore({
+		reducer: {
+			user: userSlice?.reducer,
+		},
+		middleware: (getDefaultMiddleware) =>
+			getDefaultMiddleware({
+				serializableCheck: false,
+			}),
+	});
+};
 
-export type AppStore = typeof store;
+
+export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
 

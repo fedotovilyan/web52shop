@@ -39,6 +39,25 @@ model Product {
   @@map("product")
 }
 
+model Category {
+  id                Int             @id @default(autoincrement())
+  name              String
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  sub_categories    SubCategory[]   @relation("primary_category")
+  main_categories   SubCategory[]   @relation("secondary_category")
+  @@map("category")
+}
+
+model SubCategory {
+  id                      Int         @id @default(autoincrement())
+  primary_category_id     Int
+  primary_category        Category    @relation(name: "primary_category", fields: [primary_category_id], references: [id], onDelete: Cascade)
+  secondary_category_id   Int   
+  secondary_category      Category    @relation(name: "secondary_category", fields: [secondary_category_id], references: [id], onDelete: Cascade)      
+}
+
 model UserProduct {
   id                BigInt      @id @default(autoincrement())
   user_id           String   

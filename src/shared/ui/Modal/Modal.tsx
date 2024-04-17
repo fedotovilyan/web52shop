@@ -27,6 +27,17 @@ export const Modal: FC<ModalProps> = (props) => {
 
 	useEffect(() => setMounted(true), []);
 
+	useEffect(() => {
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "Escape") {
+				onClose?.();
+			}
+		};
+
+		document.addEventListener('keydown', onKeyDown);
+		return () => document.removeEventListener("keydown", onKeyDown);
+	}, [onClose]);
+
 	const onChildrenClick: MouseEventHandler<HTMLDivElement> = (e) => {
 		e.stopPropagation();
 	};
@@ -56,7 +67,6 @@ export const Modal: FC<ModalProps> = (props) => {
 								onClick={onClose}
 							>
 								<CrossSvg
-									fill="#faad14"
 									alt=""
 									width={20}
 									height={20}

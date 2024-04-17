@@ -1,9 +1,9 @@
 import cls from "./Header.module.scss";
-import { ProfileBtns } from "./ProfileBtns/ProfileBtns";
 import { GlobalSearch } from "@/features/GlobalSearch";
 import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
 import { CatalogBtn } from "./CatalogBtn/CatalogBtn";
 import { AdminOptions } from "./AdminOptions/AdminOptions";
+import { ProfileDropdown } from "@/entities/User";
 
 export const Header = () => {
 	return (
@@ -16,7 +16,7 @@ export const Header = () => {
 				<GlobalSearch containerClassName={cls.search_input_container} />
 			</div>
 			<div className={cls.header_block}>
-				<ProfileBtns />
+				<ProfileDropdown />
 			</div>
 			<AdminOptions />
 		</header>

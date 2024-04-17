@@ -2,8 +2,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { GetCurrentUser } from "@/shared/api/User";
 import { RootState } from "@/app/store";
-import { Tokens } from "@/shared/types/Tokens";
-import { getCookie } from "cookies-next";
 import { IUser } from "@/shared/models/User";
 
 export const getProfile = createAsyncThunk<
@@ -13,11 +11,11 @@ export const getProfile = createAsyncThunk<
 >("user/profile", async (_, thunkApi) => {
 	try {
 		const state = thunkApi.getState() as RootState;
-		const accessToken: string | null =
-			state.user.auth.accessToken || getCookie(Tokens.Access) || "";
+		const accessToken: string | null = state.user.auth.accessToken || "";
 
 		return await GetCurrentUser(accessToken);
 	} catch (e: any) {
+		console.log(e);
 		return thunkApi.rejectWithValue(e.message);
 	}
 });

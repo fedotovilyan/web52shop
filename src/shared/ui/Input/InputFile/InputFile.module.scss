@@ -1,0 +1,31 @@
+.input_file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.input_file + label {
+	background-color: var(--primary-color);
+	color: var(--secondary-color);
+	cursor: pointer;
+	display: flex;
+	gap: 10px;
+	padding: 10px;
+	max-width: 200px;
+	justify-content: center;
+	align-items: center;
+	transition: 0.3s opacity ease-in-out;
+	border-radius: 10px;
+}
+
+.input_file:focus + label,
+.input_file + label:hover {
+	opacity: 0.7;
+}
+
+.icon {
+	fill: var(--secondary-color);
+}

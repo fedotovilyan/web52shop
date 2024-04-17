@@ -5,12 +5,12 @@ import { logout, selectProfile } from "@/entities/User";
 import { WEB_ROUTES } from "@/shared/routes";
 import { Button, ButtonTheme } from "@/shared/ui";
 import { useRouter } from "next/navigation";
-import cls from "./ProfileBtns.module.scss";
+import cls from "./ProfileDropdown.module.scss";
 import { DropDown, DropdownItem } from "@/shared/ui/DropDown/DropDown";
 import { useState } from "react";
 import { ProfileFormModal } from "@/features/ProfileFormModal";
 
-export const ProfileBtns = () => {
+export const ProfileDropdown = () => {
 	const {
 		profileData: { email },
 	} = useAppSelector(selectProfile);
@@ -71,6 +71,7 @@ export const ProfileBtns = () => {
 					showItems={showDropdown}
 					setShowItems={setShowDropdown}
 					items={dropDownItems}
+					showIcon
 				>
 					<Button theme={ButtonTheme.Link}>{email}</Button>
 				</DropDown>

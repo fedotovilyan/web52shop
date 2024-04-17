@@ -3,8 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IUser } from "../../../../shared/models/User";
 import { UpdateCurrentUser } from "@/shared/api/User";
 import { RootState } from "@/app/store";
-import { Tokens } from "@/shared/types/Tokens";
-import { getCookie } from "cookies-next";
 import { ProfileFormInputs } from "@/entities/User/ui/ProfileForm";
 
 export const updateProfile = createAsyncThunk<
@@ -15,7 +13,7 @@ export const updateProfile = createAsyncThunk<
 	try {
 		const state = thunkApi.getState() as RootState;
 		const accessToken: string | null =
-			state.user.auth.accessToken || getCookie(Tokens.Access) || "";
+			state.user.auth.accessToken || "";
 
 		const res = await UpdateCurrentUser(profile, accessToken);
 		return res;

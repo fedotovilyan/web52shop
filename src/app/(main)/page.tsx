@@ -3,6 +3,8 @@ import { Alert } from "@/shared/ui";
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button";
 import { AlertType } from "@/shared/types/AlertType";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
 	return (
 		<div className={styles.main}>

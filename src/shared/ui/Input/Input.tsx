@@ -3,25 +3,26 @@ import classNames from "classnames";
 import cls from "./Input.module.scss";
 import { forwardRef } from "react";
 
-export enum InputType {
+export enum InputTheme {
 	Primary = "primary",
 	Secondary = "secondary",
+	Dashed = "dashed",
 }
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-	inputType?: InputType;
+	theme?: InputTheme;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 	props: InputProps,
 	ref
 ) {
-	const { inputType = InputType.Primary, className, ...rest } = props;
+	const { theme = InputTheme.Primary, className, ...rest } = props;
 
 	return (
 		<input
 			ref={ref}
-			className={classNames(cls.Input, cls[inputType], className)}
+			className={classNames(cls.Input, cls[theme], className)}
 			{...rest}
 		/>
 	);

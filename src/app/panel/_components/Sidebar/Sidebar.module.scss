@@ -1,12 +1,16 @@
 .sidebar {
 	width: var(--sidebar-width);
 	background-color: var(--secondary-background-color);
-	padding: 20px;
+	padding: 15px;
 	transition: 0.3s width ease;
 }
 
 .collapsed {
 	width: var(--collapsed-sidebar-width);
+
+	.item_label {
+		display: none;
+	}
 }
 
 .logo {
@@ -24,4 +28,37 @@
 	top: 0px;
 	border: 1px solid rgba(236, 236, 236, 0.822);
 	background-color: rgba(236, 236, 236, 0.822);
+}
+
+.items {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.item {
+	text-decoration: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	padding: 5px;
+
+	.item_label {
+		color: var(--link-color);
+	}
+
+	&:hover {
+		background-color: color-mix(in srgb, var(--primary-color) 20%, transparent);
+		border-radius: 10px;
+	}
+
+	&.active {
+		background-color: color-mix(in srgb, var(--primary-color) 40%, transparent);
+		border-radius: 10px;
+	}
+}
+
+.icon {
+	fill: var(--primary-color);
 }

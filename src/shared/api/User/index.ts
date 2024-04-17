@@ -7,11 +7,9 @@ import { APP_URL } from "@/shared/constants";
 
 export async function GetCurrentUser(
 	accessToken: string,
-	baseUrl: string = '',
 ): Promise<GetCurrentUserResponseDTO> {
-	console.log(APP_URL);
 	const res = await interceptedFetch(
-		`${baseUrl}${API_ROUTES.getCurrentUser}`,
+		`${APP_URL}${API_ROUTES.getCurrentUser}`,
 		accessToken,
 		{
 			method: "GET",

@@ -1,0 +1,30 @@
+.files_preview {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.files {
+	display: flex;
+	gap: 5px;
+}
+
+.media_wrapper {
+	position: relative;
+
+	.close_btn {
+		top: -2px;
+		right: -2px;
+		position: absolute;
+		padding: 0;
+	}
+}
+
+.cross_icon {
+	fill: var(--primary-color);
+}
+
+.selectedFile {
+	border: 1px solid var(--primary-color);
+	padding: 2px;
+}

@@ -9,3 +9,5 @@ export * from './Divider/Divider';
 export * from './Input/SearchInput/SearchInput';
 export * from './Modal/Modal';
 export * from './ErrorText/ErrorText';
+export * from './Select/Select';
+export * from './Select/SelectWithSearch/SelectWithSearch';

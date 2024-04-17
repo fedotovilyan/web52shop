@@ -1,10 +1,8 @@
 "use client";
-import { AppDispatch, RootState } from "@/app/store";
+import { AppDispatch } from "@/app/store";
 import { Refresh, RefreshErrors } from "@/shared/api/Auth";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { resetState, setRefreshPromise } from "../userSlice";
-import { Tokens } from "@/shared/types/Tokens";
-import { getCookie } from "cookies-next";
+import { resetState } from "../userSlice";
 
 export const refreshTokens = createAsyncThunk<
 	string,
@@ -12,18 +10,12 @@ export const refreshTokens = createAsyncThunk<
 	{ rejectValue: string | null }
 >("user/refreshTokens", async (_, thunkApi) => {
 	const dispatch = thunkApi.dispatch as AppDispatch;
-	const state = thunkApi.getState() as RootState;
-	let refreshPromise = state.user.auth.refreshPromise;
 
 	try {
-		if (!refreshPromise) {
-			refreshPromise = Refresh();
-			dispatch(setRefreshPromise(refreshPromise));
-		}
-		await refreshPromise;
-		dispatch(setRefreshPromise(undefined));
-		return getCookie(Tokens.Access) || "";
+		const accessToken = await Refresh();
+		return accessToken || "";
 	} catch (e: any) {
+		console.log(e);
 		if (e.message === RefreshErrors.TokensIsExpired) {
 			dispatch(resetState());
 			return thunkApi.rejectWithValue(null);

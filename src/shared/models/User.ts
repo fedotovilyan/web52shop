@@ -1,9 +1,9 @@
 export interface IUser {
 	id: string;
-	phone: string;
 	email: string;
-	first_name: string;
-	last_name: string;
+	phone: string | null;
+	first_name: string | null;
+	last_name: string | null;
 	role: UserRole;
 	createdAt: string;
 	updatedAt: string;

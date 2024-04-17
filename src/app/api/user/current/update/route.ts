@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 
 export async function PATCH(req: Request) {
 	try {
-		const user = await AuthService.verifyUser();
+		const user = await AuthService.verifyUserInApi();
 		const body = (await req.json()) as UpdateUserBodyDTO;
 
 		if (!user) {

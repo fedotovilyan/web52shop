@@ -2,9 +2,11 @@
 /* eslint-disable no-undef */
 "use client";
 
-import { store } from "@/app/store";
+import { makeStore } from "@/app/store";
 import { isTokenExpired } from "../utils/isTokenExpired";
 import { refreshTokens, setAccessToken } from "@/entities/User";
+
+export const dynamic = "force-dynamic";
 
 type TInterceptedFetch = (
 	input: URL | RequestInfo,
@@ -17,7 +19,8 @@ export const interceptedFetch: TInterceptedFetch = async (
 	accessToken,
 	init
 ) => {
-	const dispatch = store.dispatch;
+	// eslint-disable-next-line react-hooks/rules-of-hooks
+	const dispatch = makeStore().dispatch;
 	let token = accessToken;
 	if (isTokenExpired(accessToken)) {
 		token = await dispatch(refreshTokens()).unwrap();

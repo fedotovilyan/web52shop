@@ -15,26 +15,30 @@ export async function GET(req: Request) {
 		const decoded = JwtService.verifyToken(refreshToken, Tokens.Refresh);
 		user.id = decoded.userId;
 	} catch (e) {
+		console.log(e);
 		return NextResponse.json(
 			{
 				ok: false,
-				msg: "Вы не авторизованы",
+				message: "Вы не авторизованы",
 			},
 			{ status: 401 }
 		);
 	}
 
 	try {
-		const { accessCookie, refreshCookie } = await AuthService.generateCookies({
+		const { accessToken, refreshToken } = JwtService.generateTokens({
 			userId: user.id,
 		});
+		const { refreshCookie } = await AuthService.generateCookies({
+			accessToken,
+			refreshToken,
+		});
 
-		cookiesApi.set(accessCookie);
 		cookiesApi.set(refreshCookie);
 
 		return NextResponse.json({
 			ok: true,
-			message: "Успех",
+			accessToken,
 		});
 	} catch (e: any) {
 		return NextResponse.json(

@@ -9,3 +9,4 @@ export * from './model/services/getProfile';
 export * from './model/services/refreshTokens';
 export * from './model/selectors/selectProfileData';
 export * from './model/services/updateProfile';
+export * from './ui/ProfileDropdown/ProfileDropdown';

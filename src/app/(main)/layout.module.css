@@ -6,8 +6,6 @@
 .main {
 	background-color: var(--secondary-color);
 	padding: 20px;
-	min-height: calc(
-		100vh - var(--header-height) - 2 * var(--main-wrapper-padding)
-	);
+	height: 100%;
 	border-radius: 10px;
 }

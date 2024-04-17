@@ -6,8 +6,9 @@ import { JwtService } from "../JwtService/jwt.service";
 import { GenerateCookiesResponseDTO } from "./dto/GenerateCookiesResponse.dto";
 import { Tokens } from "@/shared/types/Tokens";
 import dayjs from "dayjs";
-import { headers } from "next/headers";
-import { IUser } from "@/shared/models/User";
+import { cookies, headers } from "next/headers";
+import { IUser, UserRole } from "@/shared/models/User";
+import { VerifyUserByRefreshTokenResponseDTO } from "./dto/VerifyUserByRefreshTokenResponse.dto";
 
 export class AuthService {
 	static async register({ email, password }: AuthPayloadDTO) {
@@ -28,14 +29,12 @@ export class AuthService {
 	}
 
 	static async generateCookies({
-		userId,
+		accessToken,
+		refreshToken,
 	}: {
-		userId: IUser["id"];
+		accessToken: string;
+		refreshToken: string;
 	}): Promise<GenerateCookiesResponseDTO> {
-		const { accessToken, refreshToken } = JwtService.generateTokens({
-			userId,
-		});
-
 		const accessCookie = {
 			name: Tokens.Access,
 			value: accessToken,
@@ -70,7 +69,45 @@ export class AuthService {
 		return user;
 	}
 
-	static async verifyUser() {
+	static async verifyUserByRefreshToken(): Promise<VerifyUserByRefreshTokenResponseDTO> {
+		let response: VerifyUserByRefreshTokenResponseDTO = { status: 401 };
+		const refreshToken = cookies().get(Tokens.Refresh)?.value || "";
+
+		let userId = '';
+		try {
+			const decoded = JwtService.verifyToken(refreshToken, Tokens.Refresh);
+			userId = decoded.userId;
+		} catch {
+			return { status: 401 };
+		}
+
+		try {
+			const userResponse = await UserService.findUser({ id: userId });
+			if (!userResponse) {
+				return { status: 401 };
+			}
+			const user = { ...userResponse, password: undefined };
+
+			response = {
+				status: 200,
+				user: {
+					...user,
+					role: user.role as UserRole,
+					createdAt: user.createdAt.toISOString(),
+					updatedAt: user.updatedAt.toISOString(),
+				},
+			};
+			return response;
+		} catch(e: any) {
+			console.log(e);
+			return {
+				status: 500,
+				error: e.message,
+			};
+		}
+	}
+
+	static async verifyUserInApi() {
 		const headersApi = headers();
 		const accessToken =
 			headersApi.get("Authorization")?.split?.(" ")?.[1] || "";

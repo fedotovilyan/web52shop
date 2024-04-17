@@ -3,8 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
 	try {
-		const user = await AuthService.verifyUser();
-		console.log(user);
+		const user = await AuthService.verifyUserInApi();
 
 		return NextResponse.json({
 			ok: true,
