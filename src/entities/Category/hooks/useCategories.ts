@@ -21,11 +21,12 @@ export const useCategories = (filters: CategoryFilters) => {
 			GetCategories(filters)
 				.then(setCategories)
 				.catch((e) => {
+					console.log(e);
 					setError(e.message);
 				})
 				.finally(() => setLoading(false));
 		}
 	}, [filters]);
 
-	return { categories, loading, error };
+	return { categories, loading, error, setError };
 };

@@ -11,3 +11,4 @@ export * from './Modal/Modal';
 export * from './ErrorText/ErrorText';
 export * from './Select/Select';
 export * from './Select/SelectWithSearch/SelectWithSearch';
+export * from './Notification/Notification';

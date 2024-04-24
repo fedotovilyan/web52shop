@@ -19,26 +19,6 @@ export class CategoryService {
       select: {
         id: true,
         name: true,
-        main_categories: {
-          include: {
-            primary_category: {
-              select: {
-                id: true,
-                name: true,
-              },
-            },
-          },
-        },
-        sub_categories: {
-          include: {
-            secondary_category: {
-              select: {
-                id: true,
-                name: true,
-              },
-            },
-          },
-        },
       },
     });
   }

@@ -8,80 +8,78 @@ datasource db {
 }
 
 model User {
-  id            String      @id @default(cuid())
-  email         String      @unique @db.VarChar(255)
-  phone         String?     @unique @db.VarChar(32)
-  password      String
-  first_name    String?     @db.VarChar(127)
-  last_name     String?     @db.VarChar(127)
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  role          String      @db.VarChar(32)
-  
-  reviews       ProductReview[]
-  purchases     UserProduct[]
+  id         String          @id @default(cuid())
+  email      String          @unique @db.VarChar(255)
+  phone      String?         @unique @db.VarChar(32)
+  password   String
+  first_name String?         @db.VarChar(127)
+  last_name  String?         @db.VarChar(127)
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+  role       String          @db.VarChar(32)
+  reviews    ProductReview[]
+  purchases  UserProduct[]
 
   @@map("user")
 }
 
 model Product {
-  id            Int         @id @default(autoincrement())
-  name          String   
-  description   String?
-  price         Float
-  currency      String      @db.VarChar(16)
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-
-  buyers        UserProduct[]
-  reviews       ProductReview[]
+  id          Int             @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  currency    String          @db.VarChar(16)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  reviews     ProductReview[]
+  buyers      UserProduct[]
 
   @@map("product")
 }
 
 model Category {
-  id                Int             @id @default(autoincrement())
-  name              String
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
+  id             Int           @id @default(autoincrement())
+  name           String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  sub_categories SubCategory[] @relation("primary_category")
+  main_category  SubCategory?  @relation("secondary_category")
 
-  sub_categories    SubCategory[]   @relation("primary_category")
-  main_categories   SubCategory[]   @relation("secondary_category")
   @@map("category")
 }
 
 model SubCategory {
-  id                      Int         @id @default(autoincrement())
-  primary_category_id     Int
-  primary_category        Category    @relation(name: "primary_category", fields: [primary_category_id], references: [id], onDelete: Cascade)
-  secondary_category_id   Int   
-  secondary_category      Category    @relation(name: "secondary_category", fields: [secondary_category_id], references: [id], onDelete: Cascade)      
+  id                    Int      @id @default(autoincrement())
+  primary_category_id   Int
+  secondary_category_id Int      @unique
+  primary_category      Category @relation("primary_category", fields: [primary_category_id], references: [id])
+  secondary_category    Category @relation("secondary_category", fields: [secondary_category_id], references: [id])
 }
 
 model UserProduct {
-  id                BigInt      @id @default(autoincrement())
-  user_id           String   
-  buyer             User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  product_id        Int
-  product           Product     @relation(fields: [product_id], references: [id], onDelete: Cascade)
-  count             Int
-  status            String      @db.VarChar(32)
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @updatedAt
+  id         BigInt   @id @default(autoincrement())
+  user_id    String
+  product_id Int
+  count      Int
+  status     String   @db.VarChar(32)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  product    Product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  buyer      User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("user_product")
 }
 
 model ProductReview {
-  id                BigInt      @id @default(autoincrement())
-  user_id           String   
-  user              User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  product_id        Int
-  product           Product     @relation(fields: [product_id], references: [id], onDelete: Cascade)
-  rate              Float
-  comment           String?     @db.VarChar(500)
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @updatedAt
+  id         BigInt   @id @default(autoincrement())
+  user_id    String
+  product_id Int
+  rate       Float
+  comment    String?  @db.VarChar(500)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  product    Product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("product_review")
 }

@@ -20,23 +20,20 @@ export interface SelectOption {
 
 export interface SelectProps extends InputProps {
   options: SelectOption[];
-  onSelectChange?: (value: SelectOption["value"]) => void;
+  onSelectChange?: (option: SelectOption) => void;
 }
 
-export const Select: FC<SelectProps> = forwardRef<
+export const Select = forwardRef<
   HTMLInputElement,
   SelectProps
 >(function Select(props, ref) {
   const { className, options, onSelectChange, ...rest } = props;
   const [showOptions, setShowOptions] = useState(false);
   const [selectedValue, setSelectedValue] = useState<SelectOption["value"]>("");
-  console.log("selected value", selectedValue);
 
   const onSelect = (option: SelectOption) => {
-    console.log("onSelect");
-    console.log(option);
     setSelectedValue(option.label);
-    onSelectChange?.(option.value);
+    onSelectChange?.(option);
   };
 
   const items: DropdownItem[] = options.map((option) => ({

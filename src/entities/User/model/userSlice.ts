@@ -45,6 +45,12 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		resetState: () => initialState,
+		updateUserAuthData: (state, {payload}: PayloadAction<Partial<UserState['auth']>>) => {
+			state.auth = {
+				...state.auth,
+				...payload,
+			};
+		},
 		setRefreshPromise: (
 			state,
 			{ payload }: PayloadAction<ReturnType<typeof Refresh> | undefined>
@@ -151,5 +157,5 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { resetState, setAccessToken, setRefreshPromise } =
+export const { resetState, setAccessToken, setRefreshPromise, updateUserAuthData } =
 	userSlice.actions;

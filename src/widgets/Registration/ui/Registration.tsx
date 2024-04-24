@@ -2,7 +2,7 @@
 import { LoginFormInputs, LoginForm } from "@/entities/User/ui/LoginForm";
 import cls from "./Registration.module.scss";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { selectAuthData, startRegistration } from "@/entities/User";
+import { selectAuthData, startRegistration, updateUserAuthData } from "@/entities/User";
 import { useRouter } from "next/navigation";
 import { WEB_ROUTES } from "@/shared/routes";
 import { useEffect, useState } from "react";
@@ -15,6 +15,10 @@ export const Registration = () => {
 	const dispatch = useAppDispatch();
 	const router = useRouter();
 	const [isSuccess, setIsSuccess] = useState(false);
+
+	useEffect(() => {
+    dispatch(updateUserAuthData({ error: null }));
+  }, [dispatch]);
 
 	useEffect(() => {
 		if (isSuccess) {

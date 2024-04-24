@@ -1,3 +1,8 @@
+export interface LoginRequestDTO {
+  email: string;
+  password: string;
+}
+
 export type LoginResponseDTO =
 	| {
 			ok: true;

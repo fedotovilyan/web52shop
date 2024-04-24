@@ -14,9 +14,9 @@ export class AuthService {
 	static async register({ email, password }: AuthPayloadDTO) {
 		if (!email || !password)
 			throw ApiError.BadRequestException("Отсутствует email или пароль!");
-
+		
 		const isEmailAvailable = !(await UserService.findUser({ email }));
-
+		
 		if (!isEmailAvailable)
 			throw ApiError.BadRequestException("Введенный вами email уже занят!");
 
@@ -61,6 +61,7 @@ export class AuthService {
 
 		const user = await UserService.findUser({ email });
 		const isPassMatch = await bcrypt.compare(password, user?.password || "");
+		console.log(await bcrypt.hash("fds", 10));
 
 		if (!user || !isPassMatch) {
 			throw ApiError.BadRequestException("Введен неверный email или пароль!");

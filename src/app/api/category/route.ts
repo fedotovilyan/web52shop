@@ -10,12 +10,7 @@ export async function GET(req: NextRequest) {
       count: Number(searchParams.get('count')) || undefined,
     };
 
-    const response = await CategoryService.getCategories(filters);
-    const categories = response.map((val) => ({
-      ...val,
-      sub_categories: val.sub_categories.map((subCat) => subCat.secondary_category),
-      main_categories: val.main_categories.map((mainCat) => mainCat.primary_category),
-    }));
+    const categories = await CategoryService.getCategories(filters);
 
     return NextResponse.json({
       ok: true,

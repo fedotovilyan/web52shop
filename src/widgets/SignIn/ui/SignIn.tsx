@@ -5,7 +5,7 @@ import { FC, HTMLAttributes, useEffect, useState } from "react";
 import cls from "./SignIn.module.scss";
 import { Alert, Divider, Loader } from "@/shared/ui";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { selectAuthData, signIn } from "@/entities/User";
+import { selectAuthData, signIn, updateUserAuthData } from "@/entities/User";
 import { AlertType } from "@/shared/types/AlertType";
 import classNames from "classnames";
 import { useRouter } from "next/navigation";
@@ -19,6 +19,10 @@ export const SignIn: FC<SignInProps> = (props) => {
 	const { error, loading } = useAppSelector(selectAuthData);
 	const router = useRouter();
 	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+    dispatch(updateUserAuthData({ error: null }));
+  }, [dispatch]);
 
 	const onFormSubmit = (data: LoginFormInputs) => {
 		dispatch(signIn(data))

@@ -11,7 +11,6 @@ export async function RegisterUser(
 	const res = await fetch(API_ROUTES.register, {
 		method: "POST",
 		body: JSON.stringify(payload),
-		cache: "no-store",
 	});
 
 	const body = (await res.json()) as RegisterResponseDTO;
@@ -29,7 +28,6 @@ export async function SignIn(
 	const res = await fetch(API_ROUTES.login, {
 		method: "POST",
 		body: JSON.stringify(payload),
-		cache: "no-store",
 	});
 
 	const body = (await res.json()) as LoginResponseDTO;
